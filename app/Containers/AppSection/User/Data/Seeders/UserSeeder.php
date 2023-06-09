@@ -11,10 +11,5 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Default Permissions ----------------------------------------------------------
-        DB::table('users')->insert([
-            'name' => 'Nguyễn Phú Quân',
-            'email' => 'npquan1995@gmail.com',
-            'password' => 123456789,
-        ]);
     }
 }

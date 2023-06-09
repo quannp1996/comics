@@ -1,0 +1,6 @@
+{
+  "name": "apiato/base",
+  "description": "Base Container for apiato.",
+  "require": {
+  }
+}
