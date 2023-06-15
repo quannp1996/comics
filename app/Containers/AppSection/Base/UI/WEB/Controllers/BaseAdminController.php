@@ -6,8 +6,14 @@ use App\Ship\Parents\Controllers\WebController;
 
 class BaseAdminController extends WebController
 {
+    protected array $materialCss;
+
     public function __construct()
     {
-        dd(config('appSection-base'));
+        $this->materialCss = array_map(function ($item) {
+            return filter_var($item, FILTER_VALIDATE_URL) ? $item : asset($item);
+        }, config('appSection-base.admin.css'));
+
+        view()->share('materialCss', $this->materialCss);
     }
 }
