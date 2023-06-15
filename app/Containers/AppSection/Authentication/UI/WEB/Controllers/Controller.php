@@ -6,11 +6,12 @@ use App\Containers\AppSection\Authentication\Actions\WebLoginAction;
 use App\Containers\AppSection\Authentication\Actions\WebLogoutAction;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\LoginRequest;
 use App\Containers\AppSection\Authentication\UI\WEB\Requests\LogoutRequest;
+use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Ship\Parents\Controllers\WebController;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class Controller extends WebController
+class Controller extends BaseAdminController
 {
     public function showLoginPage()
     {

@@ -1,0 +1,1 @@
+@extends('appSection@base::admin.index')
