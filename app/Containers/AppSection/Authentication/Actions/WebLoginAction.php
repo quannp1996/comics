@@ -29,20 +29,17 @@ class WebLoginAction extends Action
             $loginCustomAttribute['loginAttribute'],
             $sanitizedData['remember_me']
         );
-
         $user = null;
         if ($isSuccessful) {
             $user = Auth::user();
         } else {
             throw new LoginFailedException();
         }
-
         $isUserConfirmed = app(CheckIfUserEmailIsConfirmedTask::class)->run($user);
 
         if (!$isUserConfirmed) {
             throw new UserNotConfirmedException();
         }
-
         return $user;
     }
 }
