@@ -8,8 +8,15 @@ use App\Ship\Parents\Requests\Request;
 
 class GetAllMenusesAction extends Action
 {
-    public function run(Request $request)
+    protected GetAllMenusesTask $task;
+
+    public function __construct(GetAllMenusesTask $task)
     {
-        return app(GetAllMenusesTask::class)->addRequestCriteria()->run();
+        $this->task = $task;
+    }
+
+    public function run(array $conditions = [])
+    {
+        return $this->task->run(true, 1);
     }
 }

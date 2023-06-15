@@ -14,8 +14,13 @@ class GetAllMenusesTask extends Task
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run(bool $hasPagination, int $limit)
     {
         return $this->repository->paginate();
+    }
+
+    public function setCondition(array $condition = []): self
+    {
+        return $this;
     }
 }

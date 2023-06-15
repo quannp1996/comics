@@ -14,8 +14,14 @@ class BaseAdminController extends WebController
         $this->materialCss = array_map(function ($item) {
             return filter_var($item, FILTER_VALIDATE_URL) ? $item : asset($item);
         }, config('appSection-base.admin.css'));
+        /**
+         * Add Css to all View
+         */
         view()->share('materialCss', $this->materialCss);
         $this->middleware(function ($request, $next) {
+            /**
+             * Add Admin User to All View
+             */
             $this->user = auth()->user();
             view()->share('user', $this->user);
             return $next($request);
