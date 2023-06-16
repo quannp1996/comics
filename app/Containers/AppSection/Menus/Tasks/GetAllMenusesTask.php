@@ -3,9 +3,9 @@
 namespace App\Containers\AppSection\Menus\Tasks;
 
 use App\Containers\AppSection\Menus\Data\Repositories\MenusRepository;
-use App\Ship\Parents\Tasks\Task;
+use App\Ship\Core\AbstractClass\ListTask;
 
-class GetAllMenusesTask extends Task
+class GetAllMenusesTask extends ListTask
 {
     protected MenusRepository $repository;
 
@@ -14,13 +14,9 @@ class GetAllMenusesTask extends Task
         $this->repository = $repository;
     }
 
-    public function run(bool $hasPagination, int $limit)
+    public function run(bool $hasPagination, int $limit): iterable
     {
-        return $this->repository->paginate();
-    }
-
-    public function setCondition(array $condition = []): self
-    {
-        return $this;
+        if(!$hasPagination) return $this->repository->limit($limit)->get();
+        return $this->repository->paginate($limit);
     }
 }

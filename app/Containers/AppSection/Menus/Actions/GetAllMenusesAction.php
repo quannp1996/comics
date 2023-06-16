@@ -3,20 +3,14 @@
 namespace App\Containers\AppSection\Menus\Actions;
 
 use App\Containers\AppSection\Menus\Tasks\GetAllMenusesTask;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Core\AbstractClass\ListAction;
 
-class GetAllMenusesAction extends Action
+class GetAllMenusesAction extends ListAction
 {
     protected GetAllMenusesTask $task;
 
     public function __construct(GetAllMenusesTask $task)
     {
         $this->task = $task;
-    }
-
-    public function run(array $conditions = [])
-    {
-        return $this->task->run(true, 1);
     }
 }
