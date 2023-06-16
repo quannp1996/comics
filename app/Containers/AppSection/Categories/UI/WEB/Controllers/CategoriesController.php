@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Categories\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\Enum\EnumBase;
 use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\CreateCategoriesRequest;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\DeleteCategoriesRequest;
@@ -18,6 +19,11 @@ use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
 
 class CategoriesController extends BaseAdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        view()->share('listStatus', EnumBase::LIST_STATUS);
+    }
     public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
         $categories = $action->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
