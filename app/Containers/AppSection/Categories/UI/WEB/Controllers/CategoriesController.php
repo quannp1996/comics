@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Categories\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\CreateCategoriesRequest;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\DeleteCategoriesRequest;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\GetAllCategoriesRequest;
@@ -14,14 +15,15 @@ use App\Containers\AppSection\Categories\Actions\FindCategoriesByIdAction;
 use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\UpdateCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
-use App\Ship\Parents\Controllers\WebController;
 
-class Controller extends WebController
+class CategoriesController extends BaseAdminController
 {
-    public function index(GetAllCategoriesRequest $request)
+    public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
-        $categories = app(GetAllCategoriesAction::class)->run($request);
-        // ..
+        $categories = $action->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        return view('appSection@categories::index', [
+            'categories' => $categories
+        ]);
     }
 
     public function show(FindCategoriesByIdRequest $request)

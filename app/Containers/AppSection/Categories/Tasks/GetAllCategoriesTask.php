@@ -3,18 +3,17 @@
 namespace App\Containers\AppSection\Categories\Tasks;
 
 use App\Containers\AppSection\Categories\Data\Repositories\CategoriesRepository;
-use App\Ship\Parents\Tasks\Task;
+use App\Ship\Core\AbstractClass\ListTask;
 
-class GetAllCategoriesTask extends Task
+class GetAllCategoriesTask extends ListTask
 {
-    protected CategoriesRepository $repository;
 
     public function __construct(CategoriesRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run(bool $hasPagination, int $limit): iterable
     {
         return $this->repository->paginate();
     }

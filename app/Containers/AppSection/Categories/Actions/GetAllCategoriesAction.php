@@ -3,13 +3,13 @@
 namespace App\Containers\AppSection\Categories\Actions;
 
 use App\Containers\AppSection\Categories\Tasks\GetAllCategoriesTask;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Core\AbstractClass\ListAction;
 
-class GetAllCategoriesAction extends Action
+class GetAllCategoriesAction extends ListAction
 {
-    public function run(Request $request)
+    public function __construct(GetAllCategoriesTask $task)
     {
-        return app(GetAllCategoriesTask::class)->addRequestCriteria()->run();
+        parent::__construct($task);
+        $this->task = $task;
     }
 }

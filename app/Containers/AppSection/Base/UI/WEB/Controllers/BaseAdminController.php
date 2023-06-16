@@ -22,8 +22,10 @@ class BaseAdminController extends WebController
             /**
              * Add Admin User to All View
              */
-            $this->user = auth()->user();
-            view()->share('user', $this->user);
+            if(auth()->user()){
+                $this->user = auth()->user();
+                view()->share('user', $this->user);
+            }
             return $next($request);
         });
     }

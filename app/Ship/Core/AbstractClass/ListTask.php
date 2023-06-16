@@ -8,13 +8,10 @@ use App\Ship\Parents\Tasks\Task;
 
 abstract class ListTask extends Task implements IGetListTask
 {
-    protected Repository $repository;
+    protected $repository;
     protected array $equalFields = [];
-    public function run(bool $hasPagination, int $limit): iterable
-    {
-        return collect([]);
-    }
-
+    abstract function run(bool $hasPagination, int $limit): iterable;
+    
     public function buildConditions(array $conditions = []): IGetListTask
     {
         if(empty($this->equalFields)) return $this;
