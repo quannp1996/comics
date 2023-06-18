@@ -12,5 +12,10 @@ Route::group([
         'as' =>  'admin_categories_list',
         'uses' => 'CategoriesController@index'
     ]);
+
+    $router->get('/add', [
+        'as' =>  'admin_categories_add_form',
+        'uses' => 'CategoriesController@addForm'
+    ]);
 });
 ?>

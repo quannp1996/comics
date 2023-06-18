@@ -7,7 +7,7 @@ use App\Ship\Parents\Models\Model;
 class Categories extends Model
 {
     protected $fillable = [
-
+        
     ];
 
     protected $attributes = [

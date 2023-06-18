@@ -32,10 +32,9 @@ class CategoriesController extends BaseAdminController
         ]);
     }
 
-    public function show(FindCategoriesByIdRequest $request)
+    public function addForm()
     {
-        $categories = app(FindCategoriesByIdAction::class)->run($request);
-        // ..
+          return view('appSection@categories::form');
     }
 
     public function create(CreateCategoriesRequest $request)

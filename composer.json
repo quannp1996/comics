@@ -34,12 +34,6 @@
         "ext-pdo": "*",
         "ext-tokenizer": "*",
         "apiato/core": "^6.2.5",
-        "apiato/documentation-generator-container": "^1.0.0",
-        "apiato/localization-container": "*",
-        "apiato/payment-container": "*",
-        "apiato/settings-container": "*",
-        "apiato/social-auth-container": "*",
-        "apiato/welcome-container": "^1.0.0",
         "doctrine/dbal": "^3.1.2",
         "fideloper/proxy": "^4.4.1",
         "fruitcake/laravel-cors": "^1.0.6",
@@ -102,7 +96,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "apiato/container-installer": true,
+            "wikimedia/composer-merge-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
