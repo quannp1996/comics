@@ -16,6 +16,9 @@ use App\Containers\AppSection\Categories\Actions\FindCategoriesByIdAction;
 use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\UpdateCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
+use App\Containers\AppSection\Categories\Enums\EnumCategory;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends BaseAdminController
 {
@@ -23,6 +26,8 @@ class CategoriesController extends BaseAdminController
     {
         parent::__construct();
         view()->share('listStatus', EnumBase::LIST_STATUS);
+        view()->share('title', 'Quản trị Danh Mục');
+        view()->share('listTypes', EnumCategory::LIST_TYPES);
     }
     public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
@@ -34,7 +39,7 @@ class CategoriesController extends BaseAdminController
 
     public function addForm()
     {
-          return view('appSection@categories::form');
+        return view('appSection@categories::form');
     }
 
     public function create(CreateCategoriesRequest $request)
@@ -42,10 +47,17 @@ class CategoriesController extends BaseAdminController
         // ..
     }
 
-    public function store(StoreCategoriesRequest $request)
+    public function store(StoreCategoriesRequest $request, CreateCategoriesAction $action)
     {
-        $categories = app(CreateCategoriesAction::class)->run($request);
-        // ..
+        DB::beginTransaction();
+        try {
+            $action->run($request->all());
+            DB::commit();
+            return redirect(route('admin_categories_list'))->with('success', );
+        } catch (Exception $e) {
+            return back()->withInput($request->all())->withErrors($e->getMessage());
+        }
+
     }
 
     public function edit(EditCategoriesRequest $request)
@@ -62,7 +74,7 @@ class CategoriesController extends BaseAdminController
 
     public function destroy(DeleteCategoriesRequest $request)
     {
-         $result = app(DeleteCategoriesAction::class)->run($request);
-         // ..
+        $result = app(DeleteCategoriesAction::class)->run($request);
+        // ..
     }
 }

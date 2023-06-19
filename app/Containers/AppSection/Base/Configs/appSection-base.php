@@ -42,6 +42,7 @@ return [
            'admin/plugins/summernote/summernote-bs4.min.js',
            'admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
            'admin/plugins/dist/js/adminlte.js',
+           'admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
        ] 
     ],
     'web' => [

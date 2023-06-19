@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary rounded-0">
+                <a class="btn btn-primary rounded-0" href="{{ route('admin_categories_add_form') }}">
                     <i class="fa fa-plus"></i>
                     Thêm mới
                 </a>

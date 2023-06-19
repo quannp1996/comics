@@ -17,5 +17,20 @@ Route::group([
         'as' =>  'admin_categories_add_form',
         'uses' => 'CategoriesController@addForm'
     ]);
+    
+    $router->get('/edit', [
+        'as' =>  'admin_categories_edit_form',
+        'uses' => 'CategoriesController@editForm'
+    ]);
+
+    $router->post('/store', [
+        'as' =>  'admin_categories_store',
+        'uses' => 'CategoriesController@store'
+    ]);
+
+    $router->post('/update', [
+        'as' =>  'admin_categories_update',
+        'uses' => 'CategoriesController@update'
+    ]);
 });
 ?>

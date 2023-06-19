@@ -3,6 +3,7 @@
 namespace App\Containers\AppSection\Categories\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Validation\Rule;
 
 class StoreCategoriesRequest extends Request
 {
@@ -35,13 +36,22 @@ class StoreCategoriesRequest extends Request
     public function rules(): array
     {
         return [
-            // 'id' => 'required'
+            'category_description.*.title' => ['required'],
+            'type' => ['required', Rule::in(1, 2)]
         ];
     }
 
     /**
      * Determine if the user is authorized to make this request.
      */
+    public function messages()
+    {
+        return [
+            'category_description.1.title.required' => 'Tiêu đề là trường bắt buộc',
+            'category_description.2.title.required' => 'Tiêu đề là trường bắt buộc',
+            'type.required' => 'Loại truyện là trường bắt buộc'
+        ];
+    }
     public function authorize(): bool
     {
         return $this->check([

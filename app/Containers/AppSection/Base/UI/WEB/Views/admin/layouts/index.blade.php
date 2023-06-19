@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>{{ @$title ?? 'AdminLTE 3 | Dashboard' }}</title>
     @if (!empty($materialCss))
         @foreach ($materialCss as $css)
             <link rel="stylesheet" href="{{ $css }}">
@@ -15,9 +15,7 @@
 
 <body class="{{ !empty($bodyClass) ? $bodyClass : '' }}">
     <div class="wrapper">
-
         <x-admin-menus></x-admin-menus>
-
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
@@ -35,6 +33,12 @@
                 </div>
             </section>
             <section class="content">
+                @if (Session::has('success'))
+                    <div class="alert alert-info">{{ Session::get('message') }}</div>
+                @endif
+                @if (Session::has('errors'))
+                    <div class="alert alert-danger">{{ Session::get('errors')->first() }}</div>
+                @endif
                 @yield('content')
             </section>
         </div>
@@ -53,6 +57,13 @@
     @foreach ($materialJs as $jsItem)
         <script src="{{ $jsItem }}"></script>
     @endforeach
+    <script>
+        $(function() {
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state');
+            })
+        });
+    </script>
     @stack('js_bot_all')
 </body>
 

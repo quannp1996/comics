@@ -14,7 +14,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('status');
-            $table->integer('pid');
+            $table->integer('pid')->nullable()->default(0);
             $table->tinyInteger('is_hot');
             $table->integer('views');
             $table->string('avatar');
