@@ -21,7 +21,7 @@ class CreateCategoriesTask extends Task
     {
         try {
             $data = Arr::only($data, [
-                'status', 'pid', 'is_hot', 'avatar', 'type'
+                'status', 'pid', 'is_hot', 'avatar', 'type', 'views'
             ]);
             return $this->repository->create($data);
         }

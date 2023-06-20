@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 class SyncCategoriesDescriptionTask extends Task
 {
     protected $repository;
-    
+
     public function __construct(CategoriesDescriptionRepository $repository)
     {
         $this->repository = $repository;
@@ -21,16 +21,17 @@ class SyncCategoriesDescriptionTask extends Task
     public function run(int $categoryID, array $data)
     {
         try {
-            $data = array_map(function($item){
-                return Arr::only([
+            $data = array_map(function ($item) use($categoryID) {
+                return array_merge(Arr::only($item, [
                     'language_id', 'title', 'description', 'meta_keyword', 'meta_title', 'meta_description'
-                ], $item);
+                ]), [
+                    'category_id' => $categoryID
+                ]);
             }, $data);
             $this->repository->where('category_id', $categoryID)->delete();
             $this->repository->insert($data);
-        }
-        catch (Exception $exception) {
-            throw new CreateResourceFailedException();
+        } catch (Exception $exception) {
+            throw new CreateResourceFailedException($exception->getMessage());
         }
     }
 }

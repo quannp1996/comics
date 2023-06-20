@@ -92,29 +92,22 @@
                     @forelse ($categories as $category)
                         <tr>
                             <td>
-                                #
+                                {{ $category->id }}
                             </td>
                             <td>
                                 <a>
-                                    AdminLTE v3
+                                    {{ @$category->desc->title }}
                                 </a>
                                 <br>
                                 <small>
-                                    Created 01.01.2019
+                                    Ngày tạo {{ $category->created_at->format('d/m/Y') }}
                                 </small>
                             </td>
                             <td>
-
+                                {{ $category->getType() }}
                             </td>
                             <td class="project_progress">
-                                <div class="progress progress-sm">
-                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                    </div>
-                                </div>
-                                <small>
-                                    57% Complete
-                                </small>
+                                {{ $category->getType() }}
                             </td>
                             <td class="project-state">
                                 <span class="badge badge-success">Success</span>

@@ -1,18 +1,16 @@
 <?php
 
-namespace Apiato\Core\Traits;
-
-use App\Ship\Criterias\Eloquent\WithCriteria;
+namespace App\Ship\Core\Traits;
 
 trait WithDataTrait
 {
-    public function withData(array $withData = [])
+    public function withData(array $withData = []): self
     {
-        if (!empty($withData)) $this->repository->pushCriteria(new WithCriteria($withData));
+        if (!empty($withData)) $this->repository->with($withData);
         return $this;
     }
 
-    public function withCount(array $withCount = [])
+    public function withCount(array $withCount = []): self
     {
         if (!empty($withCount)) $this->repository->withCount($withCount);
         return $this;

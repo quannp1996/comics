@@ -120,6 +120,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="categoryStatus">Trạng thái:</label>&nbsp;&nbsp;&nbsp;
+                                            <input type="hidden" name="status" id="status" value="0">
                                             <input type="checkbox" name="status" value="1"
                                                 {{ old('status', @$category->status) == 2 ? 'checked' : '' }}
                                                 data-bootstrap-switch>
@@ -135,6 +136,14 @@
                                             <input type="number" class="form-control" name="sort_order"
                                                 id="sort_order">
                                         </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card card-danger card-outline card-tabs">
+                                    <div class="card-header">
+                                        <h4>Media</h4>
+                                    </div>
+                                    <div class="card-body">
                                         <div class="form-group">
                                             <label for="categoryStatus">Hình ảnh:</label>&nbsp;&nbsp;&nbsp;
                                             <input type="file" name="avatar" class="form-control" id="avatar">

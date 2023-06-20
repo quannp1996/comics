@@ -14,10 +14,10 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('content');
-            $table->string('type', 255);
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('content')->nullable();
+            $table->string('type', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

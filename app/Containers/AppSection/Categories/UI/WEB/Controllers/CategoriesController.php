@@ -17,6 +17,7 @@ use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\UpdateCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
+use App\Ship\Core\Libraries\UploadImageFile;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +32,7 @@ class CategoriesController extends BaseAdminController
     }
     public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
-        $categories = $action->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        $categories = $action->setWithData(['desc'])->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
         return view('appSection@categories::index', [
             'categories' => $categories
         ]);
@@ -51,6 +52,11 @@ class CategoriesController extends BaseAdminController
     {
         DB::beginTransaction();
         try {
+            if($request->file('avatar')){
+                $request->merge([
+                    'avatar' => app(UploadImageFile::class)->setFile($request->file('avatar'))->setPath(public_path('upload/category'))->upload()
+                ]);
+            }
             $action->run($request->all());
             DB::commit();
             return redirect(route('admin_categories_list'))->with('success', );

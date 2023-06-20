@@ -10,6 +10,7 @@ abstract class ListAction extends Action
     protected bool $skipCache;
     protected array $conditions;
     protected ListTask $task;
+    protected array $withData;
 
     public function __construct(ListTask $task)
     {
@@ -22,7 +23,7 @@ abstract class ListAction extends Action
     {
         $conditions = $this->conditions;
         return $this->remember(function () use ($hasPagination, $limit, $conditions) {
-            return $this->task->buildConditions($conditions)->run($hasPagination, $limit);
+            return $this->task->buildConditions($conditions)->withData($this->withData)->run($hasPagination, $limit);
         }, $this->skipCache);
     }
 
@@ -35,6 +36,12 @@ abstract class ListAction extends Action
     public function setSkipCache(bool $skipCache): self
     {
         $this->skipCache = $skipCache;
+        return $this;
+    }
+
+    public function setWithData(array $withData): self
+    {
+        $this->withData = $withData;
         return $this;
     }
 }

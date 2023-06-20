@@ -13,6 +13,10 @@ class CreateCategoriesAction extends Action
     {
         $category = app(CreateCategoriesTask::class)->run($data);
         $categoryDesc = $data['category_description'];
+        foreach ($categoryDesc as $key => &$desc) {
+            $desc['language_id'] = $key;
+            $desc['category_id'] = $category->id;
+        }
         app(SyncCategoriesDescriptionTask::class)->run($category->id, $categoryDesc);
         return $category;
     }

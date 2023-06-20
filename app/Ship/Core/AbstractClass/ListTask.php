@@ -2,12 +2,14 @@
 namespace App\Ship\Core\AbstractClass;
 
 use App\Ship\Core\Interfaces\IGetListTask;
+use App\Ship\Core\Traits\WithDataTrait;
 use App\Ship\Criterias\ThisEqualThatCriteria;
 use App\Ship\Parents\Repositories\Repository;
 use App\Ship\Parents\Tasks\Task;
 
 abstract class ListTask extends Task implements IGetListTask
 {
+    use WithDataTrait;
     protected $repository;
     protected array $equalFields = [];
     abstract function run(bool $hasPagination, int $limit): iterable;

@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Categories\Models;
 
+use App\Containers\AppSection\Categories\Enums\EnumCategory;
 use App\Ship\Parents\Models\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -41,6 +42,12 @@ class Categories extends Model
     /**
      * A resource key to be used in the serialized responses.
      */
+
+    public function getType()
+    {
+        return @EnumCategory::LIST_TYPES[$this->type];
+    }
+
     protected string $resourceKey = 'Categories';
     
 }

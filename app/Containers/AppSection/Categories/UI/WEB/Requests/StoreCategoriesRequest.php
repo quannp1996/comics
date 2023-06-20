@@ -58,4 +58,5 @@ class StoreCategoriesRequest extends Request
             'hasAccess',
         ]);
     }
+
 }
