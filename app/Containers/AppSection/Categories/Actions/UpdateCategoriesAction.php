@@ -9,12 +9,8 @@ use App\Ship\Parents\Requests\Request;
 
 class UpdateCategoriesAction extends Action
 {
-    public function run(Request $request): Categories
+    public function run(int $categoryID, array $data): Categories
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
-
-        return app(UpdateCategoriesTask::class)->run($request->id, $data);
+        return app(UpdateCategoriesTask::class)->run($categoryID, $data);
     }
 }

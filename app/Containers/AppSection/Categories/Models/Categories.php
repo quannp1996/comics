@@ -3,12 +3,17 @@
 namespace App\Containers\AppSection\Categories\Models;
 
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
+use App\Containers\AppSection\Manga\Models\Manga;
+use App\Ship\Core\Traits\Model\TraitHtmlModel;
 use App\Ship\Parents\Models\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Categories extends Model
 {
+    use TraitHtmlModel;
+
     protected $fillable = [
         'status', 'pid', 'is_hot', 'avatar', 'type'
     ];
@@ -46,6 +51,11 @@ class Categories extends Model
     public function getType()
     {
         return @EnumCategory::LIST_TYPES[$this->type];
+    }
+
+    public function manages(): BelongsToMany
+    {
+        return $this->belongsToMany(Manga::class, 'manga_categories', 'manga_id', 'category_id');
     }
 
     protected string $resourceKey = 'Categories';

@@ -3,7 +3,9 @@
 namespace App\Containers\AppSection\Base\UI\WEB\Controllers;
 
 use App\Containers\AppSection\User\Models\User;
+use App\Ship\Core\Libraries\UploadImageFile;
 use App\Ship\Parents\Controllers\WebController;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 class BaseAdminController extends WebController
@@ -42,11 +44,21 @@ class BaseAdminController extends WebController
             /**
              * Add Admin User to All View
              */
-            if(auth()->user()){
+            if (auth()->user()) {
                 $this->user = auth()->user();
                 view()->share('user', $this->user);
             }
             return $next($request);
         });
+    }
+
+    public function uploadFile(UploadedFile $file, array &$request, string $key, string $folder)
+    {
+        $filename = app(UploadImageFile::class)
+            ->setFile($file)
+            ->setPath($folder)
+            ->upload();
+        $request[$key] = $filename;
+        return;
     }
 }

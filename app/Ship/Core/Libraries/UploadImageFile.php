@@ -9,19 +9,29 @@ use Illuminate\Http\UploadedFile;
 class UploadImageFile implements IUploadFile
 {
     public string $path;
+    public string $basePath;
+    public string $fullPath;
     public string $filename;
+
     public UploadedFile $file;
+
     public function __construct()
     {
-        $this->path = public_path();
+        $this->basePath = public_path('upload');
         $this->filename = $this->makeRandomName();
     }
     public function upload()
     {
         if (empty($this->file)) throw new Exception('Bạn phải tải ảnh lên');
+
         $extension = $this->file->getClientOriginalExtension();
+
         if (!$this->validate($extension)) throw new Exception('Định dạng tải lên không phải hình ảnh');
-        $this->file->move($this->path, $this->filename . '.' . $extension);
+
+        $this->checkPath();
+
+        $this->file->move($this->fullPath, $this->filename . '.' . $extension);
+
         return $this->path . '/' . $this->filename . '.' . $extension;
     }
 
@@ -32,8 +42,8 @@ class UploadImageFile implements IUploadFile
 
     public function setPath(string $path): self
     {
-        if (!is_dir($path)) mkdir($path);
         $this->path = $path;
+        $this->fullPath = $this->basePath.'/'.$this->path;
         return $this;
     }
     public function setFilename(string $filename): self
@@ -46,14 +56,22 @@ class UploadImageFile implements IUploadFile
     {
     }
 
+    public function setFile(UploadedFile $file): IUploadFile
+    {
+        $this->file = $file;
+        return $this;
+    }
+
     protected function makeRandomName(): string
     {
         return strtotime(now());
     }
 
-    public function setFile(UploadedFile $file): IUploadFile
+    protected function checkPath()
     {
-        $this->file = $file;
-        return $this;
+        if (!is_dir($this->fullPath)){
+            mkdir($this->fullPath);
+        }
+        return;
     }
 }

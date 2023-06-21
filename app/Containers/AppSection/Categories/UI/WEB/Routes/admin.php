@@ -18,19 +18,19 @@ Route::group([
         'uses' => 'CategoriesController@addForm'
     ]);
     
-    $router->get('/edit', [
+    $router->get('/edit/{id}', [
         'as' =>  'admin_categories_edit_form',
         'uses' => 'CategoriesController@editForm'
-    ]);
+    ])->where('id', '[0-9]+');
 
     $router->post('/store', [
         'as' =>  'admin_categories_store',
         'uses' => 'CategoriesController@store'
     ]);
 
-    $router->post('/update', [
+    $router->post('/update/{id}', [
         'as' =>  'admin_categories_update',
         'uses' => 'CategoriesController@update'
-    ]);
+    ])->where('id', '[0-9]+');
 });
 ?>

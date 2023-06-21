@@ -3,7 +3,8 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            <form action="{{ !empty($category) ? route('admin_categories_store') : route('admin_categories_store') }}"
+            <form
+                action="{{ !empty($category) ? route('admin_categories_update', $category->id) : route('admin_categories_store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
@@ -136,7 +137,7 @@
                                             <input type="number" class="form-control" name="sort_order"
                                                 id="sort_order">
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="card card-danger card-outline card-tabs">

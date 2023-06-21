@@ -1,32 +1,38 @@
 <?php
 
-namespace Apiato\Core\Traits\Model;
+namespace App\Ship\Core\Traits\Model;
 
+use App\Containers\AppSection\Base\Enum\EnumBase;
 use App\Containers\BaseContainer\Enums\BaseEnum;
 
 trait TraitHtmlModel
 {
-    public function getBadgeHtml()
+    public function getBadgeHtml($keyActive = 'status')
     {
-        $list = [
-            BaseEnum::ACTIVE => 'badge bg-success',
-            BaseEnum::DE_ACTIVE => 'badge bg-secondary',
-            BaseEnum::DELETE => 'badge bg-danger',
-        ];
-        return in_array($this->active, array_keys($list)) ? $list[$this->active] : 'badge bg-secondary';
+        return '<span class="' . $this->getClass($keyActive) . '">' . $this->getStatusText($keyActive) . '</span>';
     }
 
-    public function getStatusText(): string
+    public function getClass($keyActive = 'status')
     {
-        switch ($this->active) {
-            case BaseEnum::ACTIVE:
+        $list = [
+            EnumBase::ENABLE_STATUS => 'badge bg-success',
+            EnumBase::DISABLE_STATUS => 'badge bg-secondary',
+            EnumBase::DELETED_STATUS => 'badge bg-danger',
+        ];
+        return in_array($this->{$keyActive}, array_keys($list)) ? $list[$this->{$keyActive}] : 'badge bg-secondary';
+    }
+
+    public function getStatusText($keyActive = 'status'): string
+    {
+        switch ($this->{$keyActive}) {
+            case EnumBase::ENABLE_STATUS:
             default:
-                return 'Đã duyệt';
+                return 'Hiển thị';
                 break;
-            case BaseEnum::DE_ACTIVE:
-                return 'Chờ duyệt';
+            case EnumBase::DISABLE_STATUS:
+                return 'Ẩn';
                 break;
-            case BaseEnum::DELETE:
+            case EnumBase::DELETED_STATUS:
                 return 'Đã xóa';
                 break;
         }

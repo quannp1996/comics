@@ -9,8 +9,8 @@ use App\Ship\Parents\Requests\Request;
 
 class FindCategoriesByIdAction extends Action
 {
-    public function run(Request $request): Categories
+    public function run(int $categoryID): Categories
     {
-        return app(FindCategoriesByIdTask::class)->run($request->id);
+        return app(FindCategoriesByIdTask::class)->run($categoryID);
     }
 }

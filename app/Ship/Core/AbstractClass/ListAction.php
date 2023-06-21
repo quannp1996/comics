@@ -11,6 +11,7 @@ abstract class ListAction extends Action
     protected array $conditions;
     protected ListTask $task;
     protected array $withData;
+    protected array $withCount;
 
     public function __construct(ListTask $task)
     {
@@ -23,7 +24,7 @@ abstract class ListAction extends Action
     {
         $conditions = $this->conditions;
         return $this->remember(function () use ($hasPagination, $limit, $conditions) {
-            return $this->task->buildConditions($conditions)->withData($this->withData)->run($hasPagination, $limit);
+            return $this->task->buildConditions($conditions)->withCount($this->withCount)->withData($this->withData)->run($hasPagination, $limit);
         }, $this->skipCache);
     }
 
@@ -42,6 +43,12 @@ abstract class ListAction extends Action
     public function setWithData(array $withData): self
     {
         $this->withData = $withData;
+        return $this;
+    }
+
+    public function setWithCount($withCount): self
+    {
+        $this->withCount = $withCount;
         return $this;
     }
 }

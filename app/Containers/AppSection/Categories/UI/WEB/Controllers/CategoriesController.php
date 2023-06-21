@@ -26,13 +26,16 @@ class CategoriesController extends BaseAdminController
     public function __construct()
     {
         parent::__construct();
-        view()->share('listStatus', EnumBase::LIST_STATUS);
         view()->share('title', 'Quản trị Danh Mục');
+        view()->share('listStatus', EnumBase::LIST_STATUS);
         view()->share('listTypes', EnumCategory::LIST_TYPES);
     }
     public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
-        $categories = $action->setWithData(['desc'])->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        $categories = $action->setWithData(['desc'])
+            ->setWithCount(['manages'])
+            ->setConditions($request->all())
+            ->run($request->hasPagination ?? true, $request->limit ?? 10);
         return view('appSection@categories::index', [
             'categories' => $categories
         ]);
@@ -43,44 +46,43 @@ class CategoriesController extends BaseAdminController
         return view('appSection@categories::form');
     }
 
-    public function create(CreateCategoriesRequest $request)
+    public function editForm(EditCategoriesRequest $request, FindCategoriesByIdAction $action)
     {
-        // ..
+        $category = $action->run($request->id);
+        return view('appSection@categories::form', [
+            'category' => $category
+        ]);
     }
 
     public function store(StoreCategoriesRequest $request, CreateCategoriesAction $action)
     {
         DB::beginTransaction();
         try {
-            if($request->file('avatar')){
+            if ($request->file('avatar')) {
                 $request->merge([
                     'avatar' => app(UploadImageFile::class)->setFile($request->file('avatar'))->setPath(public_path('upload/category'))->upload()
                 ]);
             }
             $action->run($request->all());
             DB::commit();
-            return redirect(route('admin_categories_list'))->with('success', );
+            return redirect(route('admin_categories_list'))->with('success',);
         } catch (Exception $e) {
             return back()->withInput($request->all())->withErrors($e->getMessage());
         }
-
     }
 
-    public function edit(EditCategoriesRequest $request)
-    {
-        $categories = app(FindCategoriesByIdAction::class)->run($request);
-        // ..
-    }
+    
 
-    public function update(UpdateCategoriesRequest $request)
+    public function update(UpdateCategoriesRequest $request, UpdateCategoriesAction $action)
     {
-        $categories = app(UpdateCategoriesAction::class)->run($request);
-        // ..
+        $data = $request->all();
+        $this->uploadFile($request->file('avatar'), $data, 'avatar', 'category');
+        $action->run($request->id, $data);
+        return redirect(route('admin_categories_list'))->with('success', 'Cập nhật thành công');
     }
 
     public function destroy(DeleteCategoriesRequest $request)
     {
         $result = app(DeleteCategoriesAction::class)->run($request);
-        // ..
     }
 }
