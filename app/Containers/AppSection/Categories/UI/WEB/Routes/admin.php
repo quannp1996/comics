@@ -13,6 +13,11 @@ Route::group([
         'uses' => 'CategoriesController@index'
     ]);
 
+    $router->get('/ajax', [
+        'as' =>  'admin_categories_list_ajax',
+        'uses' => 'CategoriesController@ajax'
+    ]);
+
     $router->get('/add', [
         'as' =>  'admin_categories_add_form',
         'uses' => 'CategoriesController@addForm'

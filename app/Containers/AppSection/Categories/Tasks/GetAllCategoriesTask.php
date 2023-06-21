@@ -14,15 +14,4 @@ class GetAllCategoriesTask extends ListTask
         $this->repository = $repository;
         $this->equalFields = ['status', 'type'];
     }
-
-    public function run(bool $hasPagination, int $limit): iterable
-    {
-        return $this->repository->paginate();
-    }
-
-    public function buildConditions(array $conditions = []): IGetListTask
-    {
-        parent::buildConditions($conditions);
-        return $this;
-    }
 }

@@ -65,6 +65,7 @@
                                                             <input type="text" class="form-control"
                                                                 name="category_description[{{ $language['id'] }}][meta_keyword]"
                                                                 id="categoryTitle{{ $language['id'] }}"
+                                                                value="{{ old('category_description.' . $language['id'] . '.meta_keyword', @$category->desc->meta_keyword) }}"
                                                                 placeholder="Mô tả Danh Mục">
                                                             <small
                                                                 class="text-danger">{{ @$errors->get('category_description.' . $language['id'] . '.meta_keyword')[0] }}</small>
@@ -74,6 +75,7 @@
                                                                 Title</label>
                                                             <input type="text" class="form-control"
                                                                 name="category_description[{{ $language['id'] }}][meta_title]"
+                                                                value="{{ old('category_description.' . $language['id'] . '.meta_title', @$category->desc->meta_title) }}"
                                                                 id="categoryTitle{{ $language['id'] }}"
                                                                 placeholder="Mô tả Danh Mục">
                                                             <small
@@ -83,7 +85,7 @@
                                                             <label for="categoryTitle{{ $language['id'] }}">Meta
                                                                 Description</label>
                                                             <textarea class="form-control" placeholder="Meta Description"
-                                                                name="category_description[{{ $language['id'] }}][meta_description]" id="" cols="20" rows="5"></textarea>
+                                                                name="category_description[{{ $language['id'] }}][meta_description]" id="" cols="20" rows="5">{{ old('category_description.' . $language['id'] . '.meta_description', @$category->desc->meta_description) }}</textarea>
                                                             <small
                                                                 class="text-danger">{{ @$errors->get('category_description.' . $language['id'] . '.meta_description')[0] }}</small>
                                                         </div>
@@ -122,7 +124,7 @@
                                         <div class="form-group">
                                             <label for="categoryStatus">Trạng thái:</label>&nbsp;&nbsp;&nbsp;
                                             <input type="hidden" name="status" id="status" value="0">
-                                            <input type="checkbox" name="status" value="1"
+                                            <input type="checkbox" name="status" value="2"
                                                 {{ old('status', @$category->status) == 2 ? 'checked' : '' }}
                                                 data-bootstrap-switch>
                                         </div>

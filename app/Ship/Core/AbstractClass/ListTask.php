@@ -10,9 +10,12 @@ use App\Ship\Parents\Tasks\Task;
 abstract class ListTask extends Task implements IGetListTask
 {
     use WithDataTrait;
-    protected $repository;
+    protected Repository $repository;
     protected array $equalFields = [];
-    abstract function run(bool $hasPagination, int $limit): iterable;
+    public function run(bool $hasPagination, int $limit): iterable
+    {
+        return $this->repository->paginate();
+    }
     
     public function buildConditions(array $conditions = []): IGetListTask
     {

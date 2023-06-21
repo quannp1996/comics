@@ -71,12 +71,14 @@ class CategoriesController extends BaseAdminController
         }
     }
 
-    
+
 
     public function update(UpdateCategoriesRequest $request, UpdateCategoriesAction $action)
     {
         $data = $request->all();
-        $this->uploadFile($request->file('avatar'), $data, 'avatar', 'category');
+        if ($request->file('avatar')) {
+            $this->uploadFile($request->file('avatar'), $data, 'avatar', 'category');
+        }
         $action->run($request->id, $data);
         return redirect(route('admin_categories_list'))->with('success', 'Cập nhật thành công');
     }
@@ -84,5 +86,19 @@ class CategoriesController extends BaseAdminController
     public function destroy(DeleteCategoriesRequest $request)
     {
         $result = app(DeleteCategoriesAction::class)->run($request);
+    }
+
+    public function ajax(GetAllCategoriesAction $action)
+    {
+        $categories = $action->setWithData(['desc'])
+            ->setWithCount(['manages'])
+            ->setConditions(request()->all())
+            ->run(request('hasPagination', true) ?? true, request('limit', 10));
+        return response()->json($categories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'title' => $category->desc->title
+            ];
+        }));
     }
 }

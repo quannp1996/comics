@@ -3,6 +3,7 @@
 namespace App\Containers\AppSection\Categories\Models;
 
 use App\Ship\Parents\Models\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoriesDescription extends Model
 {

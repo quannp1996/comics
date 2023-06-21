@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Manga\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\CreateMangaRequest;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\DeleteMangaRequest;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\GetAllMangasRequest;
@@ -14,14 +15,15 @@ use App\Containers\AppSection\Manga\Actions\FindMangaByIdAction;
 use App\Containers\AppSection\Manga\Actions\GetAllMangasAction;
 use App\Containers\AppSection\Manga\Actions\UpdateMangaAction;
 use App\Containers\AppSection\Manga\Actions\DeleteMangaAction;
-use App\Ship\Parents\Controllers\WebController;
 
-class Controller extends WebController
+class MangesController extends BaseAdminController
 {
-    public function index(GetAllMangasRequest $request)
+    public function index(GetAllMangasRequest $request, GetAllMangasAction $action)
     {
-        $mangas = app(GetAllMangasAction::class)->run($request);
-        // ..
+        $mangas = $action->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        return view('appSection@manga::index', [
+            'mangas' => $mangas
+        ]);
     }
 
     public function show(FindMangaByIdRequest $request)

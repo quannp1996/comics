@@ -17,6 +17,8 @@ abstract class ListAction extends Action
     {
         $this->task = $task;
         $this->conditions = [];
+        $this->withCount = [];
+        $this->withData = [];
         $this->skipCache = false;
     }
 

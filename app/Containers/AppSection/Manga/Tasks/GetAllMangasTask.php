@@ -3,19 +3,12 @@
 namespace App\Containers\AppSection\Manga\Tasks;
 
 use App\Containers\AppSection\Manga\Data\Repositories\MangaRepository;
-use App\Ship\Parents\Tasks\Task;
+use App\Ship\Core\AbstractClass\ListTask;
 
-class GetAllMangasTask extends Task
+class GetAllMangasTask extends ListTask
 {
-    protected MangaRepository $repository;
-
     public function __construct(MangaRepository $repository)
     {
         $this->repository = $repository;
-    }
-
-    public function run()
-    {
-        return $this->repository->paginate();
     }
 }

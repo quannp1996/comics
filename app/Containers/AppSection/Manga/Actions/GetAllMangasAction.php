@@ -3,13 +3,12 @@
 namespace App\Containers\AppSection\Manga\Actions;
 
 use App\Containers\AppSection\Manga\Tasks\GetAllMangasTask;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Core\AbstractClass\ListAction;
 
-class GetAllMangasAction extends Action
+class GetAllMangasAction extends ListAction
 {
-    public function run(Request $request)
+    public function __construct(GetAllMangasTask $task)
     {
-        return app(GetAllMangasTask::class)->addRequestCriteria()->run();
+        parent::__construct($task);
     }
 }
