@@ -35,7 +35,8 @@ class StoreMangaRequest extends Request
     public function rules(): array
     {
         return [
-            // 'id' => 'required'
+            'manga_description.*.title' => ['required'],
+            'categories' => ['required']
         ];
     }
 

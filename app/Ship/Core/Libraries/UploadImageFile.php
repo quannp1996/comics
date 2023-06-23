@@ -32,7 +32,7 @@ class UploadImageFile implements IUploadFile
 
         $this->file->move($this->fullPath, $this->filename . '.' . $extension);
 
-        return $this->path . '/' . $this->filename . '.' . $extension;
+        return $this->filename . '.' . $extension;
     }
 
     public function validate(string $extension): bool

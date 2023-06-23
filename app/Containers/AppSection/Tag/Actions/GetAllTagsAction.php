@@ -3,13 +3,12 @@
 namespace App\Containers\AppSection\Tag\Actions;
 
 use App\Containers\AppSection\Tag\Tasks\GetAllTagsTask;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Core\AbstractClass\ListAction;
 
-class GetAllTagsAction extends Action
+class GetAllTagsAction extends ListAction
 {
-    public function run(Request $request)
+    public function __construct(GetAllTagsTask $task)
     {
-        return app(GetAllTagsTask::class)->addRequestCriteria()->run();
+        parent::__construct($task);
     }
 }

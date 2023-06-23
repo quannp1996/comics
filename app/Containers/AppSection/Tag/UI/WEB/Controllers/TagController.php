@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Tag\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Tag\UI\WEB\Requests\CreateTagRequest;
 use App\Containers\AppSection\Tag\UI\WEB\Requests\DeleteTagRequest;
 use App\Containers\AppSection\Tag\UI\WEB\Requests\GetAllTagsRequest;
@@ -16,12 +17,11 @@ use App\Containers\AppSection\Tag\Actions\UpdateTagAction;
 use App\Containers\AppSection\Tag\Actions\DeleteTagAction;
 use App\Ship\Parents\Controllers\WebController;
 
-class Controller extends WebController
+class TagController extends BaseAdminController
 {
-    public function index(GetAllTagsRequest $request)
+    public function index(GetAllTagsRequest $request, GetAllTagsAction $action)
     {
         $tags = app(GetAllTagsAction::class)->run($request);
-        // ..
     }
 
     public function show(FindTagByIdRequest $request)

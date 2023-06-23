@@ -16,12 +16,12 @@ Route::group([
 
     $router->get('/add', [
         'as' =>  'admin_manges_add_form',
-        'uses' => 'MangesController@addForm'
+        'uses' => 'MangesController@create'
     ]);
     
     $router->get('/edit/{id}', [
         'as' =>  'admin_manges_edit_form',
-        'uses' => 'MangesController@editForm'
+        'uses' => 'MangesController@edit'
     ])->where('id', '[0-9]+');
 
     $router->post('/store', [

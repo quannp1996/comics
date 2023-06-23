@@ -7,8 +7,9 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     @foreach ($breadcrumbs as $item)
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Projects</li>    
+                        <li class="breadcrumb-item {{ $loop->index == 0 ? 'active' : '' }}">
+                            <a href="{{ @$item['href'] }}">{{ @$item['lable'] }}</a>
+                        </li>
                     @endforeach
                 </ol>
             </div>

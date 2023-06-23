@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Base\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
 use App\Containers\AppSection\User\Models\User;
 use App\Ship\Core\Libraries\UploadImageFile;
 use App\Ship\Parents\Controllers\WebController;
@@ -14,7 +15,8 @@ class BaseAdminController extends WebController
     protected array $materialJs;
     protected Collection $languages;
     protected User $user;
-    public function __construct()
+    public BreadCrumbGender $breadcrumb;
+    public function __construct(BreadCrumbGender $breadcrumb)
     {
         $this->materialCss = array_map(function ($item) {
             return filter_var($item, FILTER_VALIDATE_URL) ? $item : asset($item);
@@ -34,6 +36,7 @@ class BaseAdminController extends WebController
                 'title' => 'Tiếng Anh'
             ]
         ]);
+        $this->breadcrumb = $breadcrumb;
         /**
          * Add Css to all View
          */

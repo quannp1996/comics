@@ -44,6 +44,7 @@ class CreateMangasTable extends Migration
         Schema::create('manga_description', function (Blueprint $table) {
             $table->id();
             $table->integer('language_id');
+            $table->integer('manga_id');
             $table->string('title', 250);
             $table->text('short_description', 250);
             $table->text('description');

@@ -18,6 +18,9 @@ class AdminBreadcrumbsComponent extends Component
 
     public function render()
     {
-        return view('appSection@base::components.admin_breadcrumbs');
+        return view('appSection@base::components.admin_breadcrumbs', [
+            'title' => $this->title,
+            'breadcrumbs' => $this->breadcrumbs,
+        ]);
     }    
 }

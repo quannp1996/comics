@@ -18,6 +18,12 @@ class BreadCrumbGender
         return $this;
     }
 
+    public function setList(array $item) : self 
+    {
+        $this->lists = $item;
+        return $this;
+    }
+
     public function setTitle(string $title): self
     {
         $this->title = $title;

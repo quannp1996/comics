@@ -47,7 +47,8 @@
         $(function() {
             $("input[data-bootstrap-switch]").each(function() {
                 $(this).bootstrapSwitch('state');
-            })
+            });
+            $('.select2').select2();
         });
     </script>
     @stack('js_bot_all')

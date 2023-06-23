@@ -86,9 +86,5 @@
 @endsection
 
 @push('js_bot_all')
-    <script>
-        $(function() {
-            $('.select2').select2()
-        });
-    </script>
+    
 @endpush

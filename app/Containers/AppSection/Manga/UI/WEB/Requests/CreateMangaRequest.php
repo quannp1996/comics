@@ -17,17 +17,13 @@ class CreateMangaRequest extends Request
     /**
      * Id's that needs decoding before applying the validation rules.
      */
-    protected array $decode = [
-        'id',
-    ];
+    protected array $decode = [];
 
     /**
      * Defining the URL parameters (e.g, `/user/{id}`) allows applying
      * validation rules on them and allows accessing them like request data.
      */
-    protected array $urlParameters = [
-        'id',
-    ];
+    protected array $urlParameters = [];
 
     /**
      * Get the validation rules that apply to the request.
@@ -35,7 +31,7 @@ class CreateMangaRequest extends Request
     public function rules(): array
     {
         return [
-            'id' => 'required'
+            
         ];
     }
 

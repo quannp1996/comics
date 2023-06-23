@@ -9,8 +9,8 @@ use App\Ship\Parents\Requests\Request;
 
 class FindMangaByIdAction extends Action
 {
-    public function run(Request $request): Manga
+    public function run(int $mangaID): Manga
     {
-        return app(FindMangaByIdTask::class)->run($request->id);
+        return app(FindMangaByIdTask::class)->run($mangaID);
     }
 }

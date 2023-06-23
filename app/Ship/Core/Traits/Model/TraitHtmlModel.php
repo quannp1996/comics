@@ -26,10 +26,10 @@ trait TraitHtmlModel
     {
         switch ($this->{$keyActive}) {
             case EnumBase::ENABLE_STATUS:
-            default:
                 return 'Hiển thị';
                 break;
             case EnumBase::DISABLE_STATUS:
+            default:
                 return 'Ẩn';
                 break;
             case EnumBase::DELETED_STATUS:

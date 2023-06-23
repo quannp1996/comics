@@ -3,6 +3,7 @@
 namespace App\Containers\AppSection\Categories\UI\WEB\Controllers;
 
 use App\Containers\AppSection\Base\Enum\EnumBase;
+use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
 use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\CreateCategoriesRequest;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\DeleteCategoriesRequest;
@@ -23,15 +24,25 @@ use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends BaseAdminController
 {
-    public function __construct()
+    public function __construct(BreadCrumbGender $breadCrumbGender)
     {
-        parent::__construct();
+        parent::__construct($breadCrumbGender);
         view()->share('title', 'Quản trị Danh Mục');
         view()->share('listStatus', EnumBase::LIST_STATUS);
         view()->share('listTypes', EnumCategory::LIST_TYPES);
     }
     public function index(GetAllCategoriesRequest $request, GetAllCategoriesAction $action)
     {
+        app(BreadCrumbGender::class)->setList([
+            [
+                'lable' => 'Trang chủ',
+                'href' => route('admin_default_page')
+            ],
+            [
+                'lable' => 'Danh sách Danh Mục',
+                'href' => '#'
+            ]
+        ])->setTitle('Quản trị Danh Mục');
         $categories = $action->setWithData(['desc'])
             ->setWithCount(['manages'])
             ->setConditions($request->all())
