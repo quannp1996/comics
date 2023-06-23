@@ -4,7 +4,7 @@ namespace App\Containers\AppSection\Manga\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class GetAllMangasRequest extends Request
+class GetAllChaptersByMangasRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -26,7 +26,7 @@ class GetAllMangasRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
-        // 'manga_id',
+        'manga_id',
     ];
 
     /**
@@ -35,7 +35,7 @@ class GetAllMangasRequest extends Request
     public function rules(): array
     {
         return [
-            // 'id' => 'required'
+            'manga_id' => 'required'
         ];
     }
 

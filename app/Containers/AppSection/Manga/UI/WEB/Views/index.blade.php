@@ -19,6 +19,9 @@
                             Tiêu đề
                         </th>
                         <th>
+                            Ảnh
+                        </th>
+                        <th>
                             Tác giả
                         </th>
                         <th>
@@ -47,17 +50,21 @@
                                 <small>{{ $manga->created_at->format('d/m/Y H:i:s') }}</small>
                             </td>
                             <td>
+                                <img class="img-lg img-bordered" src="{{ $manga->getImageURL() }}" alt="">
+                            </td>
+                            <td>
                                 {{ $manga->author }}
                             </td>
                             <td>
                                 @forelse ($manga->categories as $category)
                                     <p class="text-primary">{{ $category->desc->title }}</p>
                                 @empty
-                                    
                                 @endforelse
                             </td>
                             <td>
-                                <span class="badge {{ $manga->chapter_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapter_count}} chương</span>
+                                <a href="{{ route('admin_manges_chapter_list', $manga->id) }}">
+                                    <span class="badge {{ $manga->chapter_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapter_count}} chương</span>
+                                </a>
                             </td>
                             <td class="text-center">
                                 {!! $manga->getBadgeHtml() !!}

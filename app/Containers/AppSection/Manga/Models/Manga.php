@@ -69,5 +69,11 @@ class Manga extends Model
     {
         return $this->hasMany(MangaDescription::class, 'manga_id', 'id');
     }
+
+    public function getImageURL()
+    {
+        return asset('upload/manga/'. $this->avatar);
+    }
+
     protected string $resourceKey = 'Manga';
 }

@@ -35,12 +35,11 @@ Route::group([
     ])->where('id', '[0-9]+');
 
     $router->group([
-        'prefix' => 'chapter',
-        'namespace' => '',
+        'prefix' => '/{manga_id}/chapters',
     ], function($r) {
         $r->get('/', [
             'as' => 'admin_manges_chapter_list',
-            ''
+            'uses' => 'MangesController@chapters'
         ]);
     });
 });

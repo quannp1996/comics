@@ -2,9 +2,11 @@
 
 namespace App\Containers\AppSection\Manga\UI\WEB\Controllers;
 
+use App\Containers\AppSection\Base\Enum\EnumBase;
 use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
 use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
+use App\Containers\AppSection\Categories\Enums\EnumCategory;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\CreateMangaRequest;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\DeleteMangaRequest;
 use App\Containers\AppSection\Manga\UI\WEB\Requests\GetAllMangasRequest;
@@ -22,11 +24,15 @@ use Illuminate\Support\Facades\DB;
 
 class MangesController extends BaseAdminController
 {
+    use TraitChapter;
 
     public function __construct(BreadCrumbGender $breadcrumb)
     {
         parent::__construct($breadcrumb);
-        $categories = app(GetAllCategoriesAction::class)->run(false, 1000);
+        $categories = app(GetAllCategoriesAction::class)->setConditions([
+            'status' => EnumBase::ENABLE_STATUS,
+            'type' => EnumCategory::CATEGORY_MANGA
+        ])->run(false, 1000);
         view()->share('categories', $categories);
         view()->share('title', 'Truyện Tranh');
     }
@@ -75,13 +81,13 @@ class MangesController extends BaseAdminController
     public function store(StoreMangaRequest $request, CreateMangaAction $action)
     {
         DB::beginTransaction();
-        try{
+        try {
             $data = $request->all();
-            if($request->file('avatar')) $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
+            if ($request->file('avatar')) $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
             $action->run($data);
             DB::commit();
             return redirect(route('admin_manges_list'))->with('success', 'Tạo mới câu Truyện thành công!');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
             return back()->withInput($request->all())->withErrors($e->getMessage());
         }
