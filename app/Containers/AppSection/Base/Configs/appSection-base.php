@@ -43,6 +43,7 @@ return [
            'admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
            'admin/plugins/dist/js/adminlte.js',
            'admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+           'admin/plugins/dist/js/sweetalert2.js',
        ] 
     ],
     'web' => [
