@@ -55,21 +55,27 @@
                                 {!! $category->getBadgeHtml() !!}
                             </td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" href="#">
+                                <a class="btn btn-primary btn-sm" href="#" tooltip="12312">
                                     <i class="fas fa-eye">
                                     </i>
-                                    Ẩn
+                                    {{ $category->isEnable() ? 'Hiển thị' : 'Ẩn' }}
                                 </a>
                                 <a class="btn btn-info btn-sm" href="{{ route('admin_categories_edit_form', $category->id) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Sửa
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Xóa
-                                </a>
+                                @if (!$category->isDeleted())
+                                    <a class="btn btn-danger btn-sm" data-href="{{ route('admin_categories_update_field', [
+                                        'id' => $category->id,
+                                        'field' => 'status',
+                                        'value' => '-1',
+                                    ]) }}" href="#" onclick="adminJS.sendRequest(this)">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Xóa
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @empty

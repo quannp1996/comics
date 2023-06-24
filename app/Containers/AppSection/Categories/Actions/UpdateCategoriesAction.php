@@ -13,12 +13,14 @@ class UpdateCategoriesAction extends Action
     public function run(int $categoryID, array $data): Categories
     {
         $category = app(UpdateCategoriesTask::class)->run($categoryID, $data);
-        $categoryDesc = $data['category_description'];
-        foreach ($categoryDesc as $key => &$desc) {
-            $desc['language_id'] = $key;
-            $desc['category_id'] = $category->id;
+        if($categoryDesc = @$data['category_description']){
+            foreach ($categoryDesc as $key => &$desc) {
+                $desc['language_id'] = $key;
+                $desc['category_id'] = $category->id;
+            }
+            app(SyncCategoriesDescriptionTask::class)->run($category->id, $categoryDesc);
         }
-        app(SyncCategoriesDescriptionTask::class)->run($category->id, $categoryDesc);
+        
         return $category;
     }
 }

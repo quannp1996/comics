@@ -29,6 +29,7 @@ return [
            'admin/plugins/jquery-ui/jquery-ui.min.js',
            'admin/plugins/bootstrap/js/bootstrap.bundle.min.js',
            /**
+            * Libraries JS
             * Chart JS Có thể bỏ sau
             */
            'admin/plugins/chart.js/Chart.min.js',
@@ -43,7 +44,12 @@ return [
            'admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
            'admin/plugins/dist/js/adminlte.js',
            'admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
-           'admin/plugins/dist/js/sweetalert2.js',
+           'admin/dist/js/sweetalert2.js',
+
+           /**
+            * Customize JS
+            */
+           'admin/js/admin.js' 
        ] 
     ],
     'web' => [

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ @$title ?? 'AdminLTE 3 | Dashboard' }}</title>
     @if (!empty($materialCss))
         @foreach ($materialCss as $css)
@@ -20,10 +21,10 @@
             <x-admin-breadcrumbs></x-admin-breadcrumbs>
             <section class="content">
                 @if (Session::has('success'))
-                    <div class="alert alert-info">{{ Session::get('message') }}</div>
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
-                @if (Session::has('errors'))
-                    <div class="alert alert-danger">{{ Session::get('errors')->first() }}</div>
+                @if (Session::has('failed'))
+                    <div class="alert alert-danger">{{ Session::get('failed') }}</div>
                 @endif
                 @yield('content')
             </section>

@@ -33,6 +33,11 @@ Route::group([
         'uses' => 'CategoriesController@store'
     ]);
 
+    $router->post('/update_field', [
+        'as' =>  'admin_categories_update_field',
+        'uses' => 'CategoriesController@updateField'
+    ]);
+
     $router->post('/update/{id}', [
         'as' =>  'admin_categories_update',
         'uses' => 'CategoriesController@update'

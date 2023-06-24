@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Categories\Models;
 
+use App\Containers\AppSection\Base\Enum\EnumBase;
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
 use App\Containers\AppSection\Manga\Models\Manga;
 use App\Ship\Core\Traits\Model\TraitHtmlModel;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rules\Enum;
 
 class Categories extends Model
 {
@@ -60,6 +62,15 @@ class Categories extends Model
         return $this->belongsToMany(Manga::class, 'manga_categories', 'manga_id', 'category_id');
     }
 
+    public function isDeleted(): bool
+    {
+        return $this->status == EnumBase::DELETED_STATUS;
+    }
+
+    public function isEnable(): bool
+    {
+        return $this->status !== EnumBase::ENABLE_STATUS;
+    }
     protected string $resourceKey = 'Categories';
     
 }

@@ -18,6 +18,7 @@ use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\UpdateCategoriesAction;
 use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
+use App\Containers\AppSection\Categories\UI\WEB\Requests\UpdateFieldCategoriesRequest;
 use App\Ship\Core\Libraries\UploadImageFile;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -97,6 +98,21 @@ class CategoriesController extends BaseAdminController
     public function destroy(DeleteCategoriesRequest $request)
     {
         $result = app(DeleteCategoriesAction::class)->run($request);
+    }
+
+    public function updateField(UpdateFieldCategoriesRequest $request)
+    {
+        DB::beginTransaction();
+        try{
+            app(UpdateCategoriesAction::class)->run($request->id, [
+                $request->field => $request->value
+            ]);
+            DB::commit();
+            return response([
+                'success' => true
+            ], 200);
+         }catch(Exception $e){
+        }
     }
 
     public function ajax(GetAllCategoriesAction $action)
