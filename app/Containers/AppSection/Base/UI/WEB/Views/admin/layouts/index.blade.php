@@ -26,6 +26,9 @@
                 @if (Session::has('failed'))
                     <div class="alert alert-danger">{{ Session::get('failed') }}</div>
                 @endif
+                @if (Session::has('errors'))
+                    <div class="alert alert-danger">{{ Session::get('errors')->first() }}</div>
+                @endif
                 @yield('content')
             </section>
         </div>

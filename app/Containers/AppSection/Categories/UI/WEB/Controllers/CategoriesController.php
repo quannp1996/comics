@@ -79,7 +79,7 @@ class CategoriesController extends BaseAdminController
             DB::commit();
             return redirect(route('admin_categories_list'))->with('success',);
         } catch (Exception $e) {
-            return back()->withInput($request->all())->withErrors($e->getMessage());
+            return back()->withInput($request->all())->with('failed', $e->getMessage());
         }
     }
 

@@ -89,7 +89,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6">
+                            <td colspan="8">
                                 Không tìm thấy dữ liệu
                             </td>
                         </tr>
