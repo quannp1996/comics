@@ -23,17 +23,11 @@ class Manga extends Model
         'cost_reading'
     ];
 
-    protected $attributes = [
+    protected $attributes = [];
 
-    ];
+    protected $hidden = [];
 
-    protected $hidden = [
-
-    ];
-
-    protected $casts = [
-
-    ];
+    protected $casts = [];
 
     protected $dates = [
         'created_at',
@@ -72,7 +66,8 @@ class Manga extends Model
 
     public function getImageURL()
     {
-        return asset('upload/manga/'. $this->avatar);
+        if (filter_var($this->avatar, FILTER_VALIDATE_URL)) return $this->avatar;
+        return asset('upload/manga/' . $this->avatar);
     }
 
     protected string $resourceKey = 'Manga';

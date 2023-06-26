@@ -10,8 +10,16 @@ use App\Ship\Parents\Requests\Request;
 
 class FindMangaByIdAction extends Action
 {
+    protected FindMangaByIdTask $task;
+
+    public function __construct(FindMangaByIdTask $task)
+    {
+        parent::__construct();
+        $this->task = $task;
+    }
     public function run(int $mangaID): Manga
     {
-        return app(FindMangaByIdTask::class)->run($mangaID);
+        return $this->task->run($mangaID);
     }
+    
 }

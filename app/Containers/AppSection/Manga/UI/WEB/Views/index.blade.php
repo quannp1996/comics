@@ -45,15 +45,15 @@
                                 {{ $manga->id }}
                             </td>
                             <td>
-                                {{ $manga->desc->title }}
+                                {{ @$manga->desc->title }}
                                 <br>
-                                <small>{{ $manga->created_at->format('d/m/Y H:i:s') }}</small>
+                                <small>{{ !empty($manga->created_at) ? $manga->created_at->format('d/m/Y H:i:s'): '-- Đang cập nhật --' }}</small>
                             </td>
                             <td>
                                 <img class="img-lg img-bordered" src="{{ $manga->getImageURL() }}" alt="">
                             </td>
                             <td>
-                                {{ $manga->author }}
+                                {{ @$manga->author }}
                             </td>
                             <td>
                                 @forelse ($manga->categories as $category)
@@ -75,7 +75,7 @@
                                     </i>
                                     Ẩn
                                 </a>
-                                <a class="btn btn-info btn-sm" href="{{ route('admin_manges_edit_form', $category->id) }}">
+                                <a class="btn btn-info btn-sm" href="{{ route('admin_manges_edit_form', $manga->id) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Sửa
