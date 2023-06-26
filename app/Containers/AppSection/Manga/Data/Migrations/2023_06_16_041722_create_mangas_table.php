@@ -13,18 +13,18 @@ class CreateMangasTable extends Migration
     {
         Schema::create('mangas', function (Blueprint $table) {
             $table->id();
-            $table->integer('status');
-            $table->string('avatar', 250);
-            $table->tinyInteger('is_hot');
-            $table->integer('views');
-            $table->integer('type');
-            $table->integer('cost_reading');
-            $table->integer('total_chapter');
-            $table->integer('total_rating');
-            $table->integer('adv_rating');
-            $table->string('website_clone', 250);
-            $table->string('url_clone', 250);
-            $table->timestamp('time_clone');
+            $table->integer('status')->nullable(1);
+            $table->string('avatar', 250)->nullable('');
+            $table->tinyInteger('is_hot')->nullable(0);
+            $table->integer('views')->nullable(0);
+            $table->integer('type')->nullable(0);
+            $table->integer('cost_reading')->nullable(0);
+            $table->integer('total_chapter')->nullable(0);
+            $table->integer('total_rating')->nullable(0);
+            $table->integer('adv_rating')->nullable(0);
+            $table->string('website_clone', 250)->nullable('');
+            $table->string('url_clone', 250)->nullable('');
+            $table->timestamp('time_clone')->nullable(now());
             $table->timestamps();
             $table->softDeletes();
         });
@@ -43,40 +43,37 @@ class CreateMangasTable extends Migration
 
         Schema::create('manga_description', function (Blueprint $table) {
             $table->id();
-            $table->integer('language_id');
+            $table->integer('language_id')->nullable(1);
             $table->integer('manga_id');
             $table->string('title', 250);
-            $table->text('short_description', 250);
-            $table->text('description');
-            $table->string('author', 250);
-            $table->string('meta_title', 250);
-            $table->text('meta_keyword');
-            $table->text('meta_description');
+            $table->text('short_description', 250)->nullable('');
+            $table->text('description')->nullable('');
+            $table->string('author', 250)->nullable('');
+            $table->string('meta_title', 250)->nullable('');
+            $table->text('meta_keyword')->nullable('');
+            $table->text('meta_description')->nullable('');
             $table->timestamps();
-            $table->softDeletes();
         });
 
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->integer('manga_id');
             $table->string('title');
-            $table->integer('views');
-            $table->string('website_clone');
-            $table->string('url_clone');
-            $table->timestamp('time_clone');
+            $table->integer('views')->nullable(0);
+            $table->string('website_clone')->nullable('');
+            $table->string('url_clone')->nullable('');
+            $table->timestamp('time_clone')->nullable('');
             $table->timestamps();
-            $table->softDeletes();
         });
 
         Schema::create('chapter_images', function (Blueprint $table) {
             $table->id();
             $table->integer('chapter_id');
-            $table->string('source');
-            $table->string('website_clone');
-            $table->string('url_clone');
-            $table->timestamp('time_clone');
+            $table->string('source')->nullable('');
+            $table->string('website_clone')->nullable('');
+            $table->string('url_clone')->nullable('');
+            $table->timestamp('time_clone')->nullable('');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
