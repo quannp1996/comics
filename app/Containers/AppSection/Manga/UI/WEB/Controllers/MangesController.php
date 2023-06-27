@@ -52,7 +52,7 @@ class MangesController extends BaseAdminController
         );
         $mangas = $action->setWithData([
             'desc', 'categories', 'categories.desc'
-        ])->setWithCount(['chapter'])->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        ])->setWithCount(['chapters'])->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
         return view('appSection@manga::index', [
             'mangas' => $mangas
         ]);
@@ -116,9 +116,9 @@ class MangesController extends BaseAdminController
         $manga = app(UpdateMangaAction::class)->run($request);
     }
 
-    public function destroy(DeleteMangaRequest $request)
+    public function delete(DeleteMangaRequest $request)
     {
         $result = app(DeleteMangaAction::class)->run($request);
-        // ..
+        return response([], 200);
     }
 }

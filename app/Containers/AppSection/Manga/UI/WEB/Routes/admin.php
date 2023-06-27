@@ -34,6 +34,11 @@ Route::group([
         'uses' => 'MangesController@update'
     ])->where('id', '[0-9]+');
 
+    $router->delete('/delete/{id}', [
+        'as' =>  'admin_manges_delete',
+        'uses' => 'MangesController@delete'
+    ])->where('id', '[0-9]+');
+
     $router->group([
         'prefix' => '/{manga_id}/chapters',
     ], function($r) {

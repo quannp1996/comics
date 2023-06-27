@@ -63,7 +63,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('admin_manges_chapter_list', $manga->id) }}">
-                                    <span class="badge {{ $manga->chapter_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapter_count}} chương</span>
+                                    <span class="badge {{ $manga->chapters_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapters_count}} chương</span>
                                 </a>
                             </td>
                             <td class="text-center">
@@ -80,7 +80,7 @@
                                     </i>
                                     Sửa
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="#">
+                                <a class="btn btn-danger btn-sm" data-href="{{ route('admin_manges_delete', $manga->id) }}" href="#" onclick="adminJS.sendRequest(this, 'DELETE')">
                                     <i class="fas fa-trash">
                                     </i>
                                     Xóa

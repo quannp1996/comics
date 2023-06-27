@@ -9,10 +9,12 @@ use App\Ship\Parents\Models\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Manga extends Model
 {
     use TraitHtmlModel;
+    use SoftDeletes;
     protected $fillable = [
         'status',
         'is_hot',
