@@ -52,7 +52,8 @@ class MangesController extends BaseAdminController
         );
         $mangas = $action->setWithData([
             'desc', 'categories', 'categories.desc'
-        ])->setWithCount(['chapters'])->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
+        ])->setWithCount(['chapters'])
+        ->setConditions($request->all())->run($request->hasPagination ?? true, $request->limit ?? 10);
         return view('appSection@manga::index', [
             'mangas' => $mangas
         ]);
@@ -95,7 +96,7 @@ class MangesController extends BaseAdminController
 
     public function edit(EditMangaRequest $request, FindMangaByIdAction $action)
     {
-        $manga = $action->setWithCount(['chapters'])->setWithData(['all_desc'])->run($request->id);
+        $manga = $action->setWithCount(['chapters'])->setWithData(['all_desc', 'categories'])->run($request->id);
         $this->breadcrumb->setTitle('Thêm mới Truyện Tranh')->setList([
             [
                 'lable' => 'Trang chủ',
@@ -106,14 +107,34 @@ class MangesController extends BaseAdminController
                 'href' => route('admin_manges_list')
             ]
         ]);
+        
         return view('appSection@manga::form', [
-            'manga' => $manga
+            'manga' => $manga,
+            'categoriesID' => $manga->categories->map(function($category) {
+                return $category->id;
+            })->toArray(),
+            'tagsID' => $manga->tags->map(function($tag) {
+                return $tag->id;
+            })->toArray(),
         ]);
     }
 
-    public function update(UpdateMangaRequest $request)
+    public function update(UpdateMangaRequest $request, UpdateMangaAction $action)
     {
-        $manga = app(UpdateMangaAction::class)->run($request);
+        DB::beginTransaction();
+        try{
+            $data = $request->all();
+            if($request->file('avatar')){
+                $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
+            }
+            $action->run($request->id, $request->all());
+            DB::commit();
+            return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');
+        }catch(Exception $e){
+            DB::rollBack();
+            return back()->withInput($request->all())->with('failed', $e->getMessage());
+        }
+        
     }
 
     public function delete(DeleteMangaRequest $request)

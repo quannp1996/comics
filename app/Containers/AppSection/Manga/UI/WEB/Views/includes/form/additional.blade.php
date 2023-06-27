@@ -5,14 +5,14 @@
     <div class="card-body">
         <div class="form-group">
             <label for="status">Tác giả: &nbsp;</label>
-            <input type="text" class="form-control" value="" name="author">
+            <input type="text" class="form-control" value="{{ old('author', @$manga->author) }}" name="author">
         </div>
         <div class="form-group">
             <label for="status">Danh Mục: &nbsp;</label>
             <select name="categories[]" class="form-control select2" multiple id="categories">
                 <option value="">-- Chọn Danh Mục --</option>
                 @foreach ($categories ?? [] as $category)
-                    <option value="{{ $category->id }}">{{ $category->desc->title }}</option>
+                    <option value="{{ $category->id }}" {{  in_array($category->id, $categoriesID ?? []) ? 'selected' : ''  }}>{{ $category->desc->title }}</option>
                 @endforeach
             </select>
         </div>
@@ -22,7 +22,7 @@
             <select name="tags[]" class="form-control select2" multiple id="tags">
                 <option value="">-- Chọn Tag --</option>
                 @foreach ($tags ?? [] as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->desc->title }}</option>
+                    <option value="{{ $tag->id }}" {{ in_array($tag->id, $tagsID ?? []) ? 'selected' : ''  }}>{{ $tag->desc->title }}</option>
                 @endforeach
             </select>
         </div>
@@ -52,9 +52,11 @@
         <div class="form-group">
             <label for="avatar">Hình Ảnh: </label>
             <input type="file" name="avatar" class="form-control">
-            @if (!empty($manga->avatar))
-                <img src="" class="img-fluid" alt="">
-            @endif
+            <div class="text-center mt-2">
+                @if (!empty($manga->avatar))
+                    <img src="{{ $manga->avatar }}" class="img-lg img-bordered" alt="">
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -69,7 +71,7 @@
         </div>
         <div class="form-group">
             <label for="status">Số Chương: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->chapters_count : '--Đang cập nhật--' }}</span>
+            <a href="{{ route('admin_manges_chapter_list', $manga->id) }}" class="badge bg-success">{{ (int) $manga->chapters_count. ' chương' }}</a>
         </div>
     </div>
 </div>

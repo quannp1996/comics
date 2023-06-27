@@ -59,7 +59,7 @@ class Categories extends Model
 
     public function manages(): BelongsToMany
     {
-        return $this->belongsToMany(Manga::class, 'manga_categories', 'manga_id', 'category_id');
+        return $this->belongsToMany(Manga::class, 'manga_categories', 'category_id', 'manga_id');
     }
 
     public function isDeleted(): bool

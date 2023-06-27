@@ -43,7 +43,7 @@ class Manga extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Categories::class, 'manga_categories', 'category_id', 'manga_id');
+        return $this->belongsToMany(Categories::class, 'manga_categories', 'manga_id', 'category_id');
     }
 
     public function tags(): BelongsToMany
