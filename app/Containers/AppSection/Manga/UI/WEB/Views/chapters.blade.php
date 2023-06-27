@@ -3,8 +3,11 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
-                    <h2>{{ $manga->desc->title }}</h2>
+                <div class="card-header d-flex">
+                    <h2>{{ $manga->desc->title }}</h2>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+                        <i class="fa fa fa-upload"></i>
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -61,14 +64,48 @@
                 <div class="card-footer text-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            @for($i = 1; $i <= $chapters->lastPage(); $i++)
-                                <li class="page-item {{ $i == $chapters->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $chapters->url($i) }}">{{ $i }}</a></li>
+                            @for ($i = 1; $i <= $chapters->lastPage(); $i++)
+                                <li class="page-item {{ $i == $chapters->currentPage() ? 'active' : '' }}"><a
+                                        class="page-link" href="{{ $chapters->url($i) }}">{{ $i }}</a></li>
                             @endfor
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form action="">
+            @csrf
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Tải truyện</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="chapter_name">Tên chương</label>
+                            <input type="text" name="chapter_name" id="chapter_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="chapter_images">Ảnh (file .zip)</label>
+                            <input type="file" name="chapter_images" id="chapter_images" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-upload"></i>
+                            Tải lên
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 @endsection
 @push('js_bot_all')
