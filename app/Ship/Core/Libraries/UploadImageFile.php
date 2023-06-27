@@ -20,7 +20,7 @@ class UploadImageFile implements IUploadFile
         $this->basePath = public_path('upload');
         $this->filename = $this->makeRandomName();
     }
-    public function upload()
+    public function upload(): string
     {
         if (empty($this->file)) throw new Exception('Bạn phải tải ảnh lên');
 
@@ -31,7 +31,7 @@ class UploadImageFile implements IUploadFile
         $this->checkPath();
 
         $this->file->move($this->fullPath, $this->filename . '.' . $extension);
-
+        
         return $this->filename . '.' . $extension;
     }
 

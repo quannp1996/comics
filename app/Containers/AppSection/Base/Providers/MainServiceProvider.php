@@ -5,7 +5,10 @@ namespace App\Containers\AppSection\Base\Providers;
 use App\Containers\AppSection\Base\Components\AdminBreadcrumbsComponent;
 use App\Containers\AppSection\Base\Components\AdminMenuComponent;
 use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
+use App\Ship\Core\Interfaces\IUploadFile;
+use App\Ship\Core\Libraries\UploadImageFile;
 use App\Ship\Parents\Providers\MainProvider;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 
 /**
@@ -39,6 +42,9 @@ class MainServiceProvider extends MainProvider
         Blade::component('admin-breadcrumbs', AdminBreadcrumbsComponent::class);
         $this->app->singleton(BreadCrumbGender::class, function(){
             return new BreadCrumbGender();
+        });
+        $this->app->bind(IUploadFile::class, function(Application $app){
+            return new UploadImageFile();
         });
     }
 }

@@ -4,6 +4,7 @@ namespace App\Containers\AppSection\Base\UI\WEB\Controllers;
 
 use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
 use App\Containers\AppSection\User\Models\User;
+use App\Ship\Core\Interfaces\IUploadFile;
 use App\Ship\Core\Libraries\UploadImageFile;
 use App\Ship\Parents\Controllers\WebController;
 use Illuminate\Http\UploadedFile;
@@ -57,7 +58,7 @@ class BaseAdminController extends WebController
 
     public function uploadFile(UploadedFile $file, array &$request, string $key, string $folder)
     {
-        $filename = app(UploadImageFile::class)
+        $filename = app(IUploadFile::class)
             ->setFile($file)
             ->setPath($folder)
             ->upload();
