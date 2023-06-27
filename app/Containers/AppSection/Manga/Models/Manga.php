@@ -49,7 +49,7 @@ class Manga extends Model
         return $this->belongsToMany(Tag::class, 'manga_tags', 'tag_id', 'manga_id');
     }
 
-    public function chapter(): HasMany
+    public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class, 'manga_id', 'id');
     }

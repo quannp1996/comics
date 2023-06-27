@@ -1,0 +1,6 @@
+@mixin line-clamp(limit-word) {
+    display: -webkit-box;
+    -webkit-line-clamp: '';
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

@@ -27,17 +27,21 @@
                                         <button class="btn btn-danger rounded-0">
                                             <i class="fa fa-trash"></i>
                                         </button>
-                                        <button class="btn btn-success rounded-0 fancybox-trigger"
+                                        {{-- <button class="btn btn-success rounded-0 fancybox-trigger"
                                             data-index="{{ $chapter->id }}">
                                             {{ $chapter->images->count() }}
                                             <i class="fa fa-images"></i>
-                                        </button>
+                                        </button> --}}
                                         <button class="btn btn-warning" type="button">
                                             <i class="fa fa-list"></i>
                                         </button>
-                                        <a class="btn btn-info">
-                                            <i class="fa fa-eye"></i>
+                                        <a class="btn btn-info" href="javascript:;">
                                             {{ (int) $chapter->views }}
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-info" href="javascript:;">
+                                            {{ (int) $chapter->views }}
+                                            <i class="fa fa-star"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -62,14 +66,16 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            @for ($i = 1; $i <= $chapters->lastPage(); $i++)
-                                <li class="page-item {{ $i == $chapters->currentPage() ? 'active' : '' }}"><a
-                                        class="page-link" href="{{ $chapters->url($i) }}">{{ $i }}</a></li>
-                            @endfor
-                        </ul>
-                    </nav>
+                    @if ($chapters->hasPages())
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @for ($i = 1; $i <= $chapters->lastPage(); $i++)
+                                    <li class="page-item {{ $i == $chapters->currentPage() ? 'active' : '' }}"><a
+                                            class="page-link" href="{{ $chapters->url($i) }}">{{ $i }}</a></li>
+                                @endfor
+                            </ul>
+                        </nav>
+                    @endif
                 </div>
             </div>
         </div>

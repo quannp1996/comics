@@ -4,22 +4,16 @@ namespace App\Containers\AppSection\Manga\Actions;
 
 use App\Containers\AppSection\Manga\Models\Manga;
 use App\Containers\AppSection\Manga\Tasks\FindMangaByIdTask;
-use App\Ship\Core\AbstractClass\ListAction;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Core\AbstractClass\FindAction;
 
-class FindMangaByIdAction extends Action
+class FindMangaByIdAction extends FindAction
 {
-    protected FindMangaByIdTask $task;
-
+   
     public function __construct(FindMangaByIdTask $task)
     {
-        parent::__construct();
+        parent::__construct($task);
         $this->task = $task;
+        $this->withCount = [];
+        $this->withData = [];
     }
-    public function run(int $mangaID): Manga
-    {
-        return $this->task->run($mangaID);
-    }
-    
 }

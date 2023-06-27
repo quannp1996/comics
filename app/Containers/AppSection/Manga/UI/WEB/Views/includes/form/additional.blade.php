@@ -65,11 +65,11 @@
     <div class="card-body">
         <div class="form-group">
             <label for="status">Số lượt đọc: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->views : '--Đang cập nhật--' }}</span>
+            <span>{{ !empty($manga) ? (int) $manga->views : '--Đang cập nhật--' }}</span>
         </div>
         <div class="form-group">
             <label for="status">Số Chương: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->views : '--Đang cập nhật--' }}</span>
+            <span>{{ !empty($manga) ? $manga->chapters_count : '--Đang cập nhật--' }}</span>
         </div>
     </div>
 </div>
@@ -81,11 +81,11 @@
     <div class="card-body">
         <div class="form-group">
             <label for="status">Website Clone: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->website_clone : '--Đang cập nhật--' }}</span>
+            <span>{{ !empty($manga) && !empty($manga->website_clone) ? $manga->website_clone : '--Đang cập nhật--' }}</span>
         </div>
         <div class="form-group">
             <label for="status">URL Clone: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->url_clone : '--Đang cập nhật--' }}</span>
+            <span>{{ !empty($manga) && !empty($manga->url_clone) ? $manga->url_clone : '--Đang cập nhật--' }}</span>
         </div>
         <div class="form-group">
             <label for="status">Thời gian Clone: &nbsp;</label>

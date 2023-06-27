@@ -60,7 +60,7 @@ class MangesController extends BaseAdminController
 
     public function show(FindMangaByIdRequest $request)
     {
-        $manga = app(FindMangaByIdAction::class)->run($request);
+        $manga = app(FindMangaByIdAction::class)->run($request->id);
     }
 
     public function create(CreateMangaRequest $request)
@@ -93,9 +93,9 @@ class MangesController extends BaseAdminController
         }
     }
 
-    public function edit(EditMangaRequest $request)
+    public function edit(EditMangaRequest $request, FindMangaByIdAction $action)
     {
-        $manga = app(FindMangaByIdAction::class)->run($request->id);
+        $manga = $action->setWithCount(['chapters'])->setWithData(['all_desc'])->run($request->id);
         $this->breadcrumb->setTitle('Thêm mới Truyện Tranh')->setList([
             [
                 'lable' => 'Trang chủ',
@@ -114,7 +114,6 @@ class MangesController extends BaseAdminController
     public function update(UpdateMangaRequest $request)
     {
         $manga = app(UpdateMangaAction::class)->run($request);
-        // ..
     }
 
     public function destroy(DeleteMangaRequest $request)
