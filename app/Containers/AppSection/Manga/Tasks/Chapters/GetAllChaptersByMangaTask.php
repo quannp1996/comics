@@ -16,6 +16,6 @@ class GetAllChaptersByMangaTask extends ListTask
 
     public function run(bool $hasPagination, int $limit): iterable
     {
-        return $this->repository->with(['avatar', 'images'])->orderBy('id', 'desc')->get();
+        return $this->repository->with(['avatar', 'images'])->orderBy('id', 'desc')->paginate($limit);
     }
 }

@@ -20,6 +20,7 @@ use App\Containers\AppSection\Categories\Actions\DeleteCategoriesAction;
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
 use App\Containers\AppSection\Categories\UI\WEB\Requests\UpdateFieldCategoriesRequest;
 use App\Ship\Core\Libraries\UploadImageFile;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -127,5 +128,11 @@ class CategoriesController extends BaseAdminController
                 'title' => $category->desc->title
             ];
         }));
+    }
+
+    public function pdf()
+    {
+        $pdf = Pdf::loadView('appSection@categories::pdf', []);
+        return $pdf->download('invoice.pdf');
     }
 }

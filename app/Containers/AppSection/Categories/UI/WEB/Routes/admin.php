@@ -13,6 +13,11 @@ Route::group([
         'uses' => 'CategoriesController@index'
     ]);
 
+    $router->get('/pdf', [
+        'as' =>  'admin_categories_pdf',
+        'uses' => 'CategoriesController@pdf'
+    ]);
+
     $router->get('/ajax', [
         'as' =>  'admin_categories_list_ajax',
         'uses' => 'CategoriesController@ajax'

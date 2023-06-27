@@ -29,7 +29,7 @@ trait TraitChapter
         ]);
         $chapters = $action->setConditions([
             'manga_id' => $request->manga_id
-        ])->run($request->hasPagination ?? true, $request->limit ?? 1000);
+        ])->run($request->hasPagination ?? true, $request->limit ?? 12);
         return view('appSection@manga::chapters', [
             'chapters' => $chapters,
             'manga' => $manga

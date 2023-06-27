@@ -95,8 +95,20 @@ class MangesController extends BaseAdminController
 
     public function edit(EditMangaRequest $request)
     {
-        $manga = app(FindMangaByIdAction::class)->run($request);
-        // ..
+        $manga = app(FindMangaByIdAction::class)->run($request->id);
+        $this->breadcrumb->setTitle('Thêm mới Truyện Tranh')->setList([
+            [
+                'lable' => 'Trang chủ',
+                'href' => route('admin_default_page')
+            ],
+            [
+                'lable' => 'Danh sách Truyện',
+                'href' => route('admin_manges_list')
+            ]
+        ]);
+        return view('appSection@manga::form', [
+            'manga' => $manga
+        ]);
     }
 
     public function update(UpdateMangaRequest $request)

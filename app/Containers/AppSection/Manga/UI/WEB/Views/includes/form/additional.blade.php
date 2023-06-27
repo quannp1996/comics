@@ -89,7 +89,7 @@
         </div>
         <div class="form-group">
             <label for="status">Thời gian Clone: &nbsp;</label>
-            <span>{{ !empty($manga) ? $manga->time_clone->format('d/m/Y H:i:s') : '--Đang cập nhật--' }}</span>
+            <span>{{ !empty($manga) && !empty($manga->time_clone) ? $manga->time_clone->format('d/m/Y H:i:s') : '--Đang cập nhật--' }}</span>
         </div>
     </div>
 </div>

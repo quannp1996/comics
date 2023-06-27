@@ -12,8 +12,7 @@
                             <div class="col-sm-2">
                                 <div class="card">
                                     <div class="card-header text-center">
-                                        {{ $chapter->title }}
-                                        (<small class="text-danger">{{ (int) $chapter->views }} lượt xem</small>)
+                                        <strong>{{ $chapter->title }}</strong>
                                     </div>
                                     <div class="card-body">
                                         <a href="javascript:;" class="fancybox-trigger" data-index="{{ $chapter->id }}">
@@ -24,13 +23,19 @@
                                     <div class="card-footer">
                                         <button class="btn btn-danger rounded-0">
                                             <i class="fa fa-trash"></i>
-                                            Xóa
                                         </button>
                                         <button class="btn btn-success rounded-0 fancybox-trigger"
                                             data-index="{{ $chapter->id }}">
-                                            {{ $chapter->images->count() }} hình ảnh
+                                            {{ $chapter->images->count() }}
+                                            <i class="fa fa-images"></i>
                                         </button>
-                                        <div class=""></div>
+                                        <button class="btn btn-warning" type="button">
+                                            <i class="fa fa-list"></i>
+                                        </button>
+                                        <a class="btn btn-info">
+                                            <i class="fa fa-eye"></i>
+                                            {{ (int) $chapter->views }}
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +45,9 @@
                                         @foreach ($chapter->images as $image)
                                             <div class="swiper-slide">
                                                 <div>
-                                                    <img src="{{ asset('admin/images/loading.gif') }}" data-src="{{ $image->source }}" class="img-fluid lazy" alt="">
+                                                    <img src="{{ asset('admin/images/loading.gif') }}"
+                                                        data-src="{{ $image->source }}" class="img-fluid lazy"
+                                                        alt="">
                                                 </div>
                                             </div>
                                         @endforeach
@@ -50,6 +57,15 @@
                             </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="card-footer text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @for($i = 1; $i <= $chapters->lastPage(); $i++)
+                                <li class="page-item {{ $i == $chapters->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $chapters->url($i) }}">{{ $i }}</a></li>
+                            @endfor
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
