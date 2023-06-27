@@ -11,14 +11,15 @@ trait TraitChapter
 
     public function chapters(GetAllChaptersByMangasRequest $request, GetAllChapterByMangaAction $action)
     {
-        $manga = app(FindMangaByIdAction::class)->setwithData(['desc'])->run($request->manga_id);
+        $manga = app(FindMangaByIdAction::class)->run($request->manga_id);
+        $manga->load(['desc']);
         $this->breadcrumb->setTitle('Danh sách Chương')->setList([
             [
-                'lable' => 'Trang chủ',
+                'lable' => 'Danh sách Chương',
                 'href' => '#'
             ],
             [
-                'lable' => 'Trang chủ',
+                'lable' => $manga->desc->title,
                 'href' => '#'
             ],
             [
@@ -27,11 +28,11 @@ trait TraitChapter
             ]
         ]);
         $chapters = $action->setConditions([
-            'mnaga_id' => $request->manga_id
+            'manga_id' => $request->manga_id
         ])->run($request->hasPagination ?? true, $request->limit ?? 1000);
-
         return view('appSection@manga::chapters', [
-            'chapters' => $chapters
+            'chapters' => $chapters,
+            'manga' => $manga
         ]);
     }
 }

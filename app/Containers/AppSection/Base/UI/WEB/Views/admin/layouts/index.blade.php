@@ -47,12 +47,15 @@
     @foreach ($materialJs as $jsItem)
         <script src="{{ $jsItem }}"></script>
     @endforeach
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
     <script>
         $(function() {
             $("input[data-bootstrap-switch]").each(function() {
                 $(this).bootstrapSwitch('state');
             });
             $('.select2').select2();
+            $('.lazy').Lazy();
         });
     </script>
     @stack('js_bot_all')
