@@ -58,6 +58,7 @@ class BaseAdminController extends WebController
 
     public function uploadFile(UploadedFile $file, array &$request, string $key, string $folder)
     {
+        app(IUploadFile::class)->upload();
         $filename = app(IUploadFile::class)
             ->setFile($file)
             ->setPath($folder)

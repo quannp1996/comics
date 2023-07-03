@@ -47,7 +47,7 @@
                             <td>
                                 {{ @$manga->desc->title }}
                                 <br>
-                                <small>{{ !empty($manga->created_at) ? $manga->created_at->format('d/m/Y H:i:s'): '-- Đang cập nhật --' }}</small>
+                                <small>{{ !empty($manga->created_at) ? $manga->created_at->format('d/m/Y H:i:s') : '-- Đang cập nhật --' }}</small>
                             </td>
                             <td>
                                 <img class="img-lg img-bordered" src="{{ $manga->getImageURL() }}" alt="">
@@ -63,7 +63,9 @@
                             </td>
                             <td>
                                 <a href="{{ route('admin_manges_chapter_list', $manga->id) }}">
-                                    <span class="badge {{ $manga->chapters_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapters_count}} chương</span>
+                                    <span
+                                        class="badge {{ $manga->chapters_count > 0 ? 'bg-success' : 'bg-danger' }}">{{ $manga->chapters_count }}
+                                        chương</span>
                                 </a>
                             </td>
                             <td class="text-center">
@@ -80,7 +82,8 @@
                                     </i>
                                     Sửa
                                 </a>
-                                <a class="btn btn-danger btn-sm" data-href="{{ route('admin_manges_delete', $manga->id) }}" href="#" onclick="adminJS.sendRequest(this, 'DELETE')">
+                                <a class="btn btn-danger btn-sm" data-href="{{ route('admin_manges_delete', $manga->id) }}"
+                                    href="#" onclick="adminJS.sendRequest(this, 'DELETE')">
                                     <i class="fas fa-trash">
                                     </i>
                                     Xóa
@@ -96,6 +99,18 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            @if ($mangas->hasPages())
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @for ($i = 1; $i <= $mangas->lastPage(); $i++)
+                            <li class="page-item {{ $i == $mangas->currentPage() ? 'active' : '' }}"><a class="page-link"
+                                    href="{{ $mangas->url($i) }}">{{ $i }}</a></li>
+                        @endfor
+                    </ul>
+                </nav>
+            @endif
         </div>
     </div>
 @endsection

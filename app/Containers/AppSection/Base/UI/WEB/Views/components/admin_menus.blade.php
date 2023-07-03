@@ -44,32 +44,20 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin_manges_list') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
+                        <i class="nav-icon far fa-edit text-warning"></i>
                         <p>Truyện Tranh</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin_manges_list') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
-                        <p>Truyện Tranh</p>
+                        <i class="nav-icon far fa-bookmark text-warning"></i>
+                        <p>Từ khóa</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin_manges_list') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
-                        <p>Truyện Tranh</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin_manges_list') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
-                        <p>Truyện Tranh</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin_manges_list') }}" class="nav-link">
-                        <i class="nav-icon far fa-circle text-warning"></i>
-                        <p>Truyện Tranh</p>
+                        <i class="nav-icon far fa-comments text-warning"></i>
+                        <p>Binh luận</p>
                     </a>
                 </li>
             </ul>

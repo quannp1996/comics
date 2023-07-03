@@ -19,9 +19,9 @@ use App\Ship\Parents\Controllers\WebController;
 
 class TagController extends BaseAdminController
 {
-    public function index(GetAllTagsRequest $request, GetAllTagsAction $action)
+    public function index(GetAllTagsRequest $request)
     {
-        $tags = app(GetAllTagsAction::class)->run($request);
+        $tags = app(GetAllTagsAction::class)->setC;
     }
 
     public function show(FindTagByIdRequest $request)
@@ -33,6 +33,8 @@ class TagController extends BaseAdminController
     public function create(CreateTagRequest $request)
     {
         // ..
+
+
     }
 
     public function store(StoreTagRequest $request)

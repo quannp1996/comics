@@ -143,16 +143,6 @@
             display: inline-block;
         }
 
-        .swiper-slide {
-            img {
-                width: 100%;
-            }
-
-            video {
-                width: 100%;
-            }
-        }
-
         .fancybox-content {
             display: none;
             width: 50%;
