@@ -43,6 +43,7 @@ class ExceptionsHandler extends CoreExceptionsHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
+            dd($e->getMessage());
         });
 
         $this->renderable(function (ParentException $e) {

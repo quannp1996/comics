@@ -28,8 +28,8 @@ class UploadImageFile implements IUploadFile
 
         if (!$this->validate($extension)) throw new Exception('Định dạng tải lên không phải hình ảnh');
 
-        $this->checkPath();
-
+        $this->initPath();
+        
         $this->file->move($this->fullPath, $this->filename . '.' . $extension);
         
         return $this->filename . '.' . $extension;
@@ -67,11 +67,10 @@ class UploadImageFile implements IUploadFile
         return strtotime(now());
     }
 
-    protected function checkPath()
+    protected function initPath()
     {
-        if (!is_dir($this->fullPath)){
-            mkdir($this->fullPath);
-        }
+        if(!is_dir($this->basePath)) mkdir($this->basePath);
+        if (!is_dir($this->fullPath)) mkdir($this->fullPath);
         return;
     }
 }

@@ -6,15 +6,16 @@ use App\Containers\AppSection\Manga\Models\Manga;
 use App\Containers\AppSection\Manga\Tasks\UpdateMangaTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
+use Arr;
 
 class UpdateMangaAction extends Action
 {
-    public function run(Request $request): Manga
+    public function run(int $mangaID, array $allData): Manga
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
-
-        return app(UpdateMangaTask::class)->run($request->id, $data);
+        $data = Arr::only($allData, ['status', 'author', 'is_hot', 'avatar']);
+        $manga = app(UpdateMangaTask::class)->run($mangaID, $data);
+        if(!empty($allData['categories'])) $manga->categories()->sync($allData['categories']);
+        if(!empty($allData['tags'])) $manga->tags()->sync($allData['tags']);
+        return $manga;
     }
 }
