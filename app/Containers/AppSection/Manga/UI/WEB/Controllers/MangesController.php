@@ -21,6 +21,8 @@ use App\Containers\AppSection\Manga\Actions\UpdateMangaAction;
 use App\Containers\AppSection\Manga\Actions\DeleteMangaAction;
 use App\Containers\AppSection\Tag\Actions\GetAllTagsAction;
 use App\Containers\AppSection\Tag\Enums\EnumTag;
+use App\Ship\Events\HelloPusherEvent;
+use App\Ship\Events\PusherEvent;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -147,5 +149,15 @@ class MangesController extends BaseAdminController
     {
         $result = app(DeleteMangaAction::class)->run($request);
         return response([], 200);
+    }
+
+    public function pushMessage(GetAllMangasRequest $request)
+    {
+        PusherEvent::dispatch($request->message ?? 'Hello');
+    }
+
+    public function showMessage()
+    {
+        return view('appSection@manga::show');
     }
 }
