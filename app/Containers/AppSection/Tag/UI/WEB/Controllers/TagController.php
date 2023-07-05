@@ -16,12 +16,18 @@ use App\Containers\AppSection\Tag\Actions\GetAllTagsAction;
 use App\Containers\AppSection\Tag\Actions\UpdateTagAction;
 use App\Containers\AppSection\Tag\Actions\DeleteTagAction;
 use App\Ship\Parents\Controllers\WebController;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends BaseAdminController
 {
     public function index(GetAllTagsRequest $request)
     {
-        $tags = app(GetAllTagsAction::class)->setC;
+        $this->breadcrumb->setTitle('Danh sách từ khóa');
+        $tags = app(GetAllTagsAction::class)->setConditions($request->all())->run();
+        return view('appSection@tag::index', [
+            'tags' => $tags
+        ]);
     }
 
     public function show(FindTagByIdRequest $request)
@@ -39,8 +45,15 @@ class TagController extends BaseAdminController
 
     public function store(StoreTagRequest $request)
     {
-        $tag = app(CreateTagAction::class)->run($request);
-        // ..
+        DB::beginTransaction();
+        try {
+            app(CreateTagAction::class)->run($request->all());
+            DB::commit();
+            return redirect(route('admin_tags_list'))->with('success', 'Tạo mới từ khóa thành công');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
     }
 
     public function edit(EditTagRequest $request)
@@ -51,13 +64,20 @@ class TagController extends BaseAdminController
 
     public function update(UpdateTagRequest $request)
     {
-        $tag = app(UpdateTagAction::class)->run($request);
-        // ..
+        DB::beginTransaction();
+        try {
+            app(UpdateTagAction::class)->run($request->id, $request->all());
+            DB::commit();
+            return redirect(route('admin_tags_list'))->with('success', 'Cập nhật từ khóa thành công');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('failed', $e->getMessage());
+        }
     }
 
     public function destroy(DeleteTagRequest $request)
     {
-         $result = app(DeleteTagAction::class)->run($request);
-         // ..
+        $result = app(DeleteTagAction::class)->run($request);
+        // ..
     }
 }

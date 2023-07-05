@@ -22,7 +22,7 @@
             <select name="tags[]" class="form-control select2" multiple id="tags">
                 <option value="">-- Chọn Tag --</option>
                 @foreach ($tags ?? [] as $tag)
-                    <option value="{{ $tag->id }}" {{ in_array($tag->id, $tagsID ?? []) ? 'selected' : ''  }}>{{ $tag->desc->title }}</option>
+                    <option value="{{ $tag->id }}" {{ in_array($tag->id, $tagsID ?? []) ? 'selected' : ''  }}>{{ $tag->title }}</option>
                 @endforeach
             </select>
         </div>

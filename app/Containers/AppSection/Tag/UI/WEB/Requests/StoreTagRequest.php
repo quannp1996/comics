@@ -35,7 +35,7 @@ class StoreTagRequest extends Request
     public function rules(): array
     {
         return [
-            // 'id' => 'required'
+            'title' => 'required'
         ];
     }
 

@@ -12,4 +12,14 @@ Route::group([
         'as' => 'admin_tags_list',
         'uses' => 'TagController@index'
     ]);
+
+    $router->post('/store', [
+        'as' => 'admin_tags_store',
+        'uses' => 'TagController@store'
+    ]);
+
+    $router->post('/update/{id}', [
+        'as' => 'admin_tags_update',
+        'uses' => 'TagController@update'
+    ]);
 });

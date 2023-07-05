@@ -19,6 +19,8 @@ use App\Containers\AppSection\Manga\Actions\FindMangaByIdAction;
 use App\Containers\AppSection\Manga\Actions\GetAllMangasAction;
 use App\Containers\AppSection\Manga\Actions\UpdateMangaAction;
 use App\Containers\AppSection\Manga\Actions\DeleteMangaAction;
+use App\Containers\AppSection\Tag\Actions\GetAllTagsAction;
+use App\Containers\AppSection\Tag\Enums\EnumTag;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +35,12 @@ class MangesController extends BaseAdminController
             'status' => EnumBase::ENABLE_STATUS,
             'type' => EnumCategory::CATEGORY_MANGA
         ])->run(false, 1000);
+        $tags = app(GetAllTagsAction::class)->setConditions([
+            'status' => EnumBase::ENABLE_STATUS,
+            'type' => EnumTag::TYPE_COMMIC
+        ])->run(false);
         view()->share('categories', $categories);
+        view()->share('tags', $tags);
         view()->share('title', 'Truyện Tranh');
     }
     public function index(GetAllMangasRequest $request, GetAllMangasAction $action)
@@ -76,6 +83,7 @@ class MangesController extends BaseAdminController
                 'href' => route('admin_manges_list')
             ]
         ]);
+        
         return view('appSection@manga::form');
     }
 
@@ -97,6 +105,7 @@ class MangesController extends BaseAdminController
     public function edit(EditMangaRequest $request, FindMangaByIdAction $action)
     {
         $manga = $action->setWithCount(['chapters'])->setWithData(['all_desc', 'categories'])->run($request->id);
+        $manga->all_desc = $manga->all_desc->keyBy('language_id');
         $this->breadcrumb->setTitle('Thêm mới Truyện Tranh')->setList([
             [
                 'lable' => 'Trang chủ',
@@ -107,7 +116,6 @@ class MangesController extends BaseAdminController
                 'href' => route('admin_manges_list')
             ]
         ]);
-        
         return view('appSection@manga::form', [
             'manga' => $manga,
             'categoriesID' => $manga->categories->map(function($category) {
@@ -124,9 +132,7 @@ class MangesController extends BaseAdminController
         DB::beginTransaction();
         try{
             $data = $request->all();
-            if($request->file('avatar')){
-                $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
-            }
+            if($request->file('avatar')) $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
             $action->run($request->id, $request->all());
             DB::commit();
             return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');

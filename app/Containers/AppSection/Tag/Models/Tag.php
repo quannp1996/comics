@@ -2,13 +2,13 @@
 
 namespace App\Containers\AppSection\Tag\Models;
 
+use App\Ship\Core\Traits\Model\TraitHtmlModel;
 use App\Ship\Parents\Models\Model;
 
 class Tag extends Model
 {
-    protected $fillable = [
-
-    ];
+    use TraitHtmlModel;
+    protected $fillable = ['title', 'type', 'status', 'color'];
 
     protected $attributes = [
 

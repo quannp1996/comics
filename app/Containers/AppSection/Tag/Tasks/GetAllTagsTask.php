@@ -8,8 +8,6 @@ use App\Ship\Parents\Tasks\Task;
 
 class GetAllTagsTask extends ListTask
 {
-    protected TagRepository $repository;
-
     public function __construct(TagRepository $repository)
     {
         $this->repository = $repository;

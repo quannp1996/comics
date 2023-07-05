@@ -17,9 +17,7 @@ class UpdateTagRequest extends Request
     /**
      * Id's that needs decoding before applying the validation rules.
      */
-    protected array $decode = [
-        'id',
-    ];
+    protected array $decode = [];
 
     /**
      * Defining the URL parameters (e.g, `/user/{id}`) allows applying
@@ -35,7 +33,9 @@ class UpdateTagRequest extends Request
     public function rules(): array
     {
         return [
-            'id' => 'required'
+            'id' => 'required',
+            'title' => 'required',
+            'type' => 'required'
         ];
     }
 
