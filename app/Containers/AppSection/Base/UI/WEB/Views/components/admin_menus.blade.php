@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin_manges_list') }}" class="nav-link">
+                    <a href="{{ route('admin_tags_list') }}" class="nav-link">
                         <i class="nav-icon far fa-bookmark text-warning"></i>
                         <p>Từ khóa</p>
                     </a>

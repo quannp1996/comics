@@ -41,6 +41,7 @@
         "guzzlehttp/guzzle": "^7.3.0",
         "laravel/framework": "^8.73.0",
         "laravel/tinker": "^2.6.0",
+        "pusher/pusher-php-server": "^7.2",
         "wikimedia/composer-merge-plugin": "^2.0.1"
     },
     "require-dev": {
