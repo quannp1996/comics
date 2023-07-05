@@ -135,7 +135,8 @@ class MangesController extends BaseAdminController
         try{
             $data = $request->all();
             if($request->file('avatar')) $this->uploadFile($request->file('avatar'), $data, 'avatar', 'manga');
-            $action->run($request->id, $request->all());
+            $manga = $action->run($request->id, $request->all());
+            event(new PusherEvent('Cập nhật Truyện thành công', $manga->desc->title, $manga->getImageURL()));
             DB::commit();
             return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');
         }catch(Exception $e){

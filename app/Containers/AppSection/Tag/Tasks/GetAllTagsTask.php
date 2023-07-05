@@ -11,5 +11,6 @@ class GetAllTagsTask extends ListTask
     public function __construct(TagRepository $repository)
     {
         $this->repository = $repository;
+        $this->equalFields = ['status', 'type'];
     }
 }

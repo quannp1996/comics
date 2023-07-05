@@ -26,7 +26,8 @@ class TagController extends BaseAdminController
         $this->breadcrumb->setTitle('Danh sách từ khóa');
         $tags = app(GetAllTagsAction::class)->setConditions($request->all())->run();
         return view('appSection@tag::index', [
-            'tags' => $tags
+            'tags' => $tags,
+            'search' => $request
         ]);
     }
 

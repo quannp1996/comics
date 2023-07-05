@@ -15,7 +15,6 @@ class UpdateTagAction extends Action
         $data = Arr::only($requestData, [
             'title', 'type', 'status', 'color'
         ]);
-
         return app(UpdateTagTask::class)->run($id, $data);
     }
 }

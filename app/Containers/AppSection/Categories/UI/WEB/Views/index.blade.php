@@ -1,6 +1,16 @@
 @extends('appSection@base::admin.layouts.index')
 @section('content')
     @include('appSection@categories::includes.list.search')
+    <div class="toast" style="position: absolute; top: 0; right: 0;" data-delay="10000">
+        <div class="toast-header">
+            <img style="max-width: 100px; max-height: 100px" src="" class="rounded mr-2 img-fluid" alt="...">
+            <strong class="mr-auto" id="toast-title"></strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body"></div>
+    </div>
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh Mục</h3>
@@ -106,25 +116,12 @@
             cluster: 'ap1'
         });
 
-        var channel = pusher.subscribe('development-push');
+        var channel = pusher.subscribe('notification');
         channel.bind('App\\Ship\\Events\\PusherEvent', function(data) {
-            new Swal({
-            title: data.message,
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            },
-            text: "",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Hủy',
-            confirmButtonText: 'Xác nhận'
-        }).then(result => {
-        });
+            $('.toast .toast-body').text(data.message);
+            $('.toast .toast-header img').attr('src', data.image);
+            $('.toast .toast-header #toast-title').text(data.title);
+            $('.toast').toast('show');
         });
     </script>
 @endpush
