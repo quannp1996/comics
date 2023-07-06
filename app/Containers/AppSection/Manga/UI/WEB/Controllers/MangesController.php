@@ -144,7 +144,7 @@ class MangesController extends BaseAdminController
                 event(new PusherNoticationCategoriesEvent('Cập nhật Truyện thành công', $manga->desc->title, $manga->getImageURL(), $category->id));
             }
             event(new PusherNotication('Cập nhật Truyện thành công', $manga->desc->title, $manga->getImageURL()));
-            event(new PusherHomeNotication('Cập nhật Truyện thành công Cập nhật Truyện thành công Cập nhật Truyện thành công Cập nhật Truyện thành công '. $manga->desc->title));
+            event(new PusherHomeNotication('Cập nhật Truyện thành công '. $manga->desc->title));
             DB::commit();
             return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');
         }catch(Exception $e){

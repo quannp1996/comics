@@ -83,7 +83,7 @@
                     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
                         <div class="container-search-header">
                             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                                <img src="assets/img/icon/icon-close.png" alt="CLOSE">
+                                <img src="{{ asset('template/assets/img/icon/icon-close.png') }}" alt="CLOSE">
                             </button>
                             <form class="wrap-search-header flex-w p-l-15">
                                 <button class="flex-c-m trans-04">
