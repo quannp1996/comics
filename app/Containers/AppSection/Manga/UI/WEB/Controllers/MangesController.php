@@ -23,6 +23,7 @@ use App\Containers\AppSection\Tag\Actions\GetAllTagsAction;
 use App\Containers\AppSection\Tag\Enums\EnumTag;
 use App\Ship\Events\HelloPusherEvent;
 use App\Ship\Events\PusherEvent;
+use App\Ship\Events\PusherHomeNotication;
 use App\Ship\Events\PusherNotication;
 use App\Ship\Events\PusherNoticationCategoriesEvent;
 use Exception;
@@ -143,6 +144,7 @@ class MangesController extends BaseAdminController
                 event(new PusherNoticationCategoriesEvent('Cập nhật Truyện thành công', $manga->desc->title, $manga->getImageURL(), $category->id));
             }
             event(new PusherNotication('Cập nhật Truyện thành công', $manga->desc->title, $manga->getImageURL()));
+            event(new PusherHomeNotication('Cập nhật Truyện thành công Cập nhật Truyện thành công Cập nhật Truyện thành công Cập nhật Truyện thành công '. $manga->desc->title));
             DB::commit();
             return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');
         }catch(Exception $e){

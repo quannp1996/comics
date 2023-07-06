@@ -2,7 +2,10 @@
 
 namespace App\Containers\AppSection\FrontEnd\Providers;
 
+use App\Containers\AppSection\FrontEnd\Components\HeaderMenuComponent;
+use App\Containers\AppSection\FrontEnd\Components\TopMenuComponent;
 use App\Ship\Parents\Providers\MainProvider;
+use Blade;
 
 /**
  * The Main Service Provider of this container, it will be automatically registered in the framework.
@@ -29,8 +32,11 @@ class MainServiceProvider extends MainProvider
     public function register(): void
     {
         parent::register();
+    }
 
-        // $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        // ...
+    public function boot(): void
+    {
+        Blade::component('header-menu', HeaderMenuComponent::class);
+        Blade::component('topn-menu', TopMenuComponent::class);
     }
 }

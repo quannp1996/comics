@@ -1,0 +1,1 @@
+@extends('appSection@frontEnd::'. $template .'.index')
