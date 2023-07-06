@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\FrontEnd\Providers;
 
+use App\Containers\AppSection\FrontEnd\Components\FooterMenuComponent;
 use App\Containers\AppSection\FrontEnd\Components\HeaderMenuComponent;
 use App\Containers\AppSection\FrontEnd\Components\TopMenuComponent;
 use App\Ship\Parents\Providers\MainProvider;
@@ -37,6 +38,7 @@ class MainServiceProvider extends MainProvider
     public function boot(): void
     {
         Blade::component('header-menu', HeaderMenuComponent::class);
-        Blade::component('topn-menu', TopMenuComponent::class);
+        Blade::component('top-menu', TopMenuComponent::class);
+        Blade::component('footer-menu', FooterMenuComponent::class);
     }
 }

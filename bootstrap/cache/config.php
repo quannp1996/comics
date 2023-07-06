@@ -93,6 +93,11 @@
         'driver' => 'session',
         'provider' => 'users',
       ),
+      'customer' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'users',
+      ),
       'api' => 
       array (
         'driver' => 'passport',
