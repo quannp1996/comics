@@ -60,6 +60,18 @@
                         <p>Binh luận</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin_manges_list') }}" class="nav-link">
+                        <i class="nav-icon far fa-sun text-warning"></i>
+                        <p>Cấu Hình</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin_manges_list') }}" class="nav-link">
+                        <i class="nav-icon far fa-list-alt text-warning"></i>
+                        <p>Menu</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

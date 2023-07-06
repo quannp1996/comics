@@ -4,10 +4,10 @@
                        common css start
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
+
 .brand {
     background: var(--brand);
 }
-
 
 .boxed-btn {
     background: var(--brand);
@@ -27,9 +27,7 @@
 }
 
 
-:root {
-    --brand: #f27fb5;
-}
+
 /* html{
     scroll-behavior: smooth;
 } */
@@ -3891,7 +3889,7 @@ ul.top-info li p.info-text {
 }
 
 .footer {
-    background-color: #f27fb559;
+    background-color: var(--brand);
     color: #fff;
     position: relative;
 }

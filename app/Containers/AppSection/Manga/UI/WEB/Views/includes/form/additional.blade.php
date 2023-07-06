@@ -29,9 +29,9 @@
 
         <div class="form-group">
             <label for="status">Trạng thái: &nbsp;</label>
-            <input type="hidden" name="status" id="0">
-            <input type="checkbox" name="status" value="1"
-                {{ old('status', @$manga->status) == 1 ? 'checked' : '' }} data-bootstrap-switch>
+            <input type="hidden" name="status" id="1">
+            <input type="checkbox" name="status" value="2"
+                {{ old('status', @$manga->status) == 2 ? 'checked' : '' }} data-bootstrap-switch>
         </div>
         <div class="form-group">
             <label for="is_hot">Nổi bật: &nbsp;</label>

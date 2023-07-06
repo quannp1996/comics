@@ -9,31 +9,20 @@ use Illuminate\View\View;
 
 class BaseFrontEndController extends WebController
 {
-    protected array $materialCss;
-    protected array $materialJs;
-    protected User $user;
+   
     protected string $template;
-    public BreadCrumbGender $breadcrumb;
+    protected User $user;
+    protected BreadCrumbGender $breadcrumb;
 
     public function __construct(BreadCrumbGender $breadcrumb)
     {
-        $this->materialCss = array_map(function ($item) {
-            return filter_var($item, FILTER_VALIDATE_URL) ? $item : asset($item);
-        }, config('appSection-base.admin.css'));
-
-        $this->materialJs = array_map(function ($item) {
-            return filter_var($item, FILTER_VALIDATE_URL) ? $item : asset($item);
-        }, config('appSection-base.admin.js'));
-
-
         $this->breadcrumb = $breadcrumb;
         /**
          * Add Css to all View
          */
         $this->template = config('appSection-frontend.template');
         view()->share('template', $this->template);
-        view()->share('materialCss', $this->materialCss);
-        view()->share('materialJs', $this->materialJs);
+     
         $this->middleware(function ($request, $next) {
             /**
              * Add Admin User to All View
@@ -50,4 +39,5 @@ class BaseFrontEndController extends WebController
     {
         return view('appSection@frontEnd::' . $this->template . '.' . $path, $data);
     }
+
 }

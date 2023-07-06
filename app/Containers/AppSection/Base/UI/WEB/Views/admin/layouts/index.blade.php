@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('template/assets/img/logo/favicon.ico') }}">
     <title>{{ @$title ?? 'AdminLTE 3 | Dashboard' }}</title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="manifest" href="/app.webmanifest" crossorigin="use-credentials" />

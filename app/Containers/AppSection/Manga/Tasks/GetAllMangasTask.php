@@ -10,5 +10,6 @@ class GetAllMangasTask extends ListTask
     public function __construct(MangaRepository $repository)
     {
         $this->repository = $repository;
+        $this->equalFields = ['status'];
     }
 }

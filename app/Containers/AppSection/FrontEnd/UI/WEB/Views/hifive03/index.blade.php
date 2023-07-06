@@ -8,6 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Truyện Tranh</title>
+    <style> 
+        :root {
+            --brand: #f27fb5;
+        }
+    </style>
     <link rel="icon" href="{{ asset('template/assets/img/logo/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/slicknav.css') }}">
@@ -19,10 +24,24 @@
 </head>
 
 <body>
+    <!-- Hiệu ứng Lá Đào rơi -->
+    <div class="wrap">
+        <canvas id="sakura"></canvas>
+    </div>
+
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{{ asset('template/assets/img/logo/preloader.png') }}" alt>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <x-header-menu></x-header-menu>
     @yield('content')
-    
-
     <x-footer-menu></x-footer-menu>
 
     @if (!auth('customer')->check())
@@ -45,8 +64,8 @@
                                     <label for="email" class="form-label">Email
                                         address</label>
                                     <input type="email" data-validation="email"
-                                        data-content="Email has a invalid format" class="form-control"
-                                        name="email" id="email">
+                                        data-content="Email has a invalid format" class="form-control" name="email"
+                                        id="email">
                                     <div class="form_text">We'll never share
                                         your email with anyone else.</div>
                                 </div>
@@ -62,18 +81,15 @@
                                 <div class="form_icons">
                                     <div class="icon_tit">Sign in with social account</div>
                                     <ul class="d-flex flex-wrap text-center justify-content-center ">
-                                        <li class="goo"><a href="#"><i
-                                                    class="fa-brands fa-google"></i></a>
+                                        <li class="goo"><a href="#"><i class="fa-brands fa-google"></i></a>
                                         </li>
-                                        <li class="fac"><a href="#"><i
-                                                    class="fa-brands fa-facebook-f"></i></a></li>
-                                        <li class="twi"><a href="#"><i
-                                                    class="fa-brands fa-twitter"></i></a>
+                                        <li class="fac"><a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                                         </li>
-                                        <li class="ins"><a href="#"><i
-                                                    class="fa-brands fa-instagram"></i></a></li>
-                                        <li class="pat"><a href="#"><i
-                                                    class="fa-brands fa-patreon"></i></a>
+                                        <li class="twi"><a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                        </li>
+                                        <li class="ins"><a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
+                                        <li class="pat"><a href="#"><i class="fa-brands fa-patreon"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -125,7 +141,7 @@
     <script src="{{ asset('template/assets/js/main.js') }}" type="7276df2cb977e01a61aedecd-text/javascript"></script>
     <script src="{{ asset('template/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}"
         data-cf-settings="7276df2cb977e01a61aedecd-|49" defer></script>
-    {{-- <script>
+    <script>
         (function() {
             var js =
                 "window['__CF$cv$params']={r:'7d7766116da80f04',m:'KJx6W4ryrh_REEycjTlXScmh84u7akFXzJp81NDBz9c-1686796306-0-AcEHADMR0wf2jkmwppGHBfO9G8JiWhLiSHgNSPrI5jNF'};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='cdn-cgi/challenge-platform/h/g/scripts/jsd/6cdb09c9/invisible.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";
@@ -163,7 +179,7 @@
                 };
             }
         })();
-    </script> --}}
+    </script>
 
     <script>
         // Enable pusher logging - don't include this in production
@@ -184,7 +200,8 @@
                 /*up/down/left/right*/
                 speed: 0.09,
                 /*true/false/number*/
-                /*For vertical/horizontal 600*/ /*For marquee 0.05*/ /*For typewriter 50*/
+                /*For vertical/horizontal 600*/
+                /*For marquee 0.05*/ /*For typewriter 50*/
                 controls: {
                     toggle: $('.acme-news-ticker-pause'),
                     /*Can be used for horizontal/horizontal/typewriter*/
