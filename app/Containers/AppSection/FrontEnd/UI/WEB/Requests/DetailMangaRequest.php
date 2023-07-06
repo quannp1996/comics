@@ -21,7 +21,7 @@ class DetailMangaRequest extends Request
      * validation rules on them and allows accessing them like request data.
      */
     protected array $urlParameters = [
-        'slug',
+        'id', 'slug',
     ];
 
     /**
@@ -31,6 +31,7 @@ class DetailMangaRequest extends Request
     {
         return [
             'slug' => ['required'],
+            'id' => ['required']
         ];
     }
 }

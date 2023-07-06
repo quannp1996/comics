@@ -40,32 +40,8 @@ class ExceptionsHandler extends CoreExceptionsHandler
      *
      * @return void
      */
-    public function register()
+    public function render($request, Throwable $e)
     {
-        $this->reportable(function (Throwable $e) {
-            dd($e->getMessage());
-        });
-
-        $this->renderable(function (ParentException $e) {
-            $response = null;
-
-            if (config('app.debug')) {
-                $response = [
-                    'message' => $e->getMessage(),
-                    'errors' => $e->getErrors(),
-                    'exception' => static::class,
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                    'trace' => $e->gettrace()
-                ];
-            } else {
-                $response = [
-                    'message' => $e->getMessage(),
-                    'errors' => $e->getErrors()
-                ];
-            }
-
-            return response()->json($response, $e->getCode());
-        });
+        dd($e->getMessage());
     }
 }

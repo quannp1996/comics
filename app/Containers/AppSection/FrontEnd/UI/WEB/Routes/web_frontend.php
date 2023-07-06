@@ -12,8 +12,14 @@ Route::group([
     /**
      * Manga
      */
-    $router->get('/{slug}', [
-        'as' => 'frontend_manga_detail',
-        'uses' => '\App\Containers\AppSection\FrontEnd\UI\WEB\Controllers\MangaController@detail'
-    ]);
+    $router->group([
+        'prefix' => 'manga',
+        'namespace' => '\App\Containers\AppSection\FrontEnd\UI\WEB\Controllers'
+    ], function ($r){
+        $r->get('/{slug}/{id}', [
+            'as' => 'frontend_manga_detail',
+            'uses' => 'MangaController@detail'
+        ]);
+    });
+    
 });

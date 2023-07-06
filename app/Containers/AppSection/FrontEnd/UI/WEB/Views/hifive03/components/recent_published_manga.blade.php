@@ -3,7 +3,7 @@
 </div>
 @if (!empty($manges) && $manges->isNotEmpty())
     @foreach ($manges as $manga)
-        <a href="manga_single_page.html">
+        <a href="{{ $manga->getLinkDetail()  }}">
             <div class="trand-right-single d-flex">
                 <div class="trand-right-img">
                     <img class="play" style="width: 100%" src="{{ $manga->getImageURL() }}" alt>

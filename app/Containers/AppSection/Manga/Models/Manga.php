@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Manga extends Model
 {
@@ -53,7 +54,7 @@ class Manga extends Model
 
     public function chapters(): HasMany
     {
-        return $this->hasMany(Chapter::class, 'manga_id', 'id');
+        return $this->hasMany(Chapter::class, 'manga_id', 'id')->orderBy('id', 'ASC');
     }
 
     public function desc(): HasOne
@@ -70,6 +71,14 @@ class Manga extends Model
     {
         if (filter_var($this->avatar, FILTER_VALIDATE_URL)) return $this->avatar;
         return asset('upload/manga/' . $this->avatar);
+    }
+
+    public function getLinkDetail()
+    {
+        return route('frontend_manga_detail', [
+            'id' => $this->id,
+            'slug' => Str::slug($this->desc->title)
+        ]);
     }
 
     protected string $resourceKey = 'Manga';
