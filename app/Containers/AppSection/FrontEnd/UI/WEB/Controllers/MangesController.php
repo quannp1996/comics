@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Containers\AppSection\Manga\UI\WEB\Controllers;
+namespace App\Containers\AppSection\FrontEnd\UI\WEB\Controllers;
 
 use App\Containers\AppSection\Base\Enum\EnumBase;
 use App\Containers\AppSection\Base\Libraries\BreadCrumbGender;
 use App\Containers\AppSection\Base\UI\WEB\Controllers\BaseAdminController;
 use App\Containers\AppSection\Categories\Actions\GetAllCategoriesAction;
 use App\Containers\AppSection\Categories\Enums\EnumCategory;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\CreateMangaRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\DeleteMangaRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\GetAllMangasRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\FindMangaByIdRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\UpdateMangaRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\StoreMangaRequest;
-use App\Containers\AppSection\Manga\UI\WEB\Requests\EditMangaRequest;
-use App\Containers\AppSection\Manga\Actions\CreateMangaAction;
-use App\Containers\AppSection\Manga\Actions\FindMangaByIdAction;
-use App\Containers\AppSection\Manga\Actions\GetAllMangasAction;
-use App\Containers\AppSection\Manga\Actions\UpdateMangaAction;
-use App\Containers\AppSection\Manga\Actions\DeleteMangaAction;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\CreateMangaRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\DeleteMangaRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\GetAllMangasRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\FindMangaByIdRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\UpdateMangaRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\StoreMangaRequest;
+use App\Containers\AppSection\FrontEnd\UI\WEB\Requests\EditMangaRequest;
+use App\Containers\AppSection\FrontEnd\Actions\CreateMangaAction;
+use App\Containers\AppSection\FrontEnd\Actions\FindMangaByIdAction;
+use App\Containers\AppSection\FrontEnd\Actions\GetAllMangasAction;
+use App\Containers\AppSection\FrontEnd\Actions\UpdateMangaAction;
+use App\Containers\AppSection\FrontEnd\Actions\DeleteMangaAction;
 use App\Containers\AppSection\Tag\Actions\GetAllTagsAction;
 use App\Containers\AppSection\Tag\Enums\EnumTag;
 use App\Ship\Events\HelloPusherEvent;

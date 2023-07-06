@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ @$title ?? 'AdminLTE 3 | Dashboard' }}</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/app.webmanifest" crossorigin="use-credentials" />
     @if (!empty($materialCss))
         @foreach ($materialCss as $css)
             <link rel="stylesheet" href="{{ $css }}">

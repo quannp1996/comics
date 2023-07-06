@@ -117,7 +117,7 @@
         });
 
         var channel = pusher.subscribe('notification');
-        channel.bind('App\\Ship\\Events\\PusherEvent', function(data) {
+        channel.bind('App\\Ship\\Events\\PusherNotication', function(data) {
             $('.toast .toast-body').text(data.message);
             $('.toast .toast-header img').attr('src', data.image);
             $('.toast .toast-header #toast-title').text(data.title);

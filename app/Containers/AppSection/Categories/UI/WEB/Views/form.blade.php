@@ -174,3 +174,21 @@
         </div>
     </div>
 @endsection
+@push('js_bot_all')
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    @if (!empty($category))
+        <script>
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('fa037a4bac2cb6548e51', {
+                cluster: 'ap1'
+            });
+
+            var channel = pusher.subscribe('notification_{{ $category->id }}');
+            channel.bind('App\\Ship\\Events\\PusherNoticationCategoriesEvent', function(data) {
+                alert(data.message);
+            });
+        </script>
+    @endif
+@endpush
