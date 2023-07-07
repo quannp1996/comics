@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="footer_img">
-                    <img class src="assets/img/logo/girl.png" alt>
+                    <img class src="{{ asset('template/assets/img/logo/girl.png') }}" alt>
                 </div>
                 <div class="col-lg-12">
                     <div class="AtoZ_list">
@@ -46,7 +46,7 @@
             </div>
             <div class="row justify-content-between mt-5">
                 <div class="col-lg-4 col-md-6 footer-widget footer-about">
-                    <img loading="lazy" class="footer-logo" src="assets/img/logo/logo.png" alt="logo">
+                    <img loading="lazy" class="footer-logo" src="{{ asset('template/assets/img/logo/logo.png') }}" alt="logo">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor inci done
                         idunt ut
                         labore et dolore magna aliqua.</p>

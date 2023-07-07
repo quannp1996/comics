@@ -6,3 +6,5 @@
 
     @include('appSection@frontEnd::'. $template . '.pages.home.includes.bottom')
 @endsection
+
+

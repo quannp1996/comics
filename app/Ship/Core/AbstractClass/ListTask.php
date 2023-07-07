@@ -14,7 +14,7 @@ abstract class ListTask extends Task implements IGetListTask
     protected array $equalFields = [];
     public function run(bool $hasPagination, int $limit): iterable
     {
-        return $this->repository->paginate();
+        return $this->repository->paginate($limit);
     }
     
     public function buildConditions(array $conditions = []): IGetListTask

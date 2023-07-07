@@ -8,7 +8,6 @@ class MangaDescription extends Model
 {
     public $table = 'manga_description';
    
-
     protected $attributes = [
 
     ];

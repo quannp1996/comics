@@ -18,6 +18,8 @@ class CreateCommentsTable extends Migration
             $table->string('email')->nullable();
             $table->string('content')->nullable();
             $table->string('type', 255)->nullable();
+            $table->integer('object_id')->nullable();
+            $table->integer('reply_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

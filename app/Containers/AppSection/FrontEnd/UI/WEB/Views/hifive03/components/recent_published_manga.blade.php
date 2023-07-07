@@ -6,7 +6,7 @@
         <a href="{{ $manga->getLinkDetail()  }}">
             <div class="trand-right-single d-flex">
                 <div class="trand-right-img">
-                    <img class="play" style="width: 100%" src="{{ $manga->getImageURL() }}" alt>
+                    <img class="play" style="width: 100%; height: 10px;" src="{{ $manga->getImageURL() }}" alt>
                     <div class="overlay_play2">
                         <i class="fa-solid fa-heart"> 61M</i>
                     </div>

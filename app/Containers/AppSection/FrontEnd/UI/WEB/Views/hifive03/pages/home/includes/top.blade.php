@@ -275,7 +275,7 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <x-published-manges :limit="10"></x-published-manges>
+                    <x-published-manges :limit="6"></x-published-manges>
                 </div>
             </div>
         </div>

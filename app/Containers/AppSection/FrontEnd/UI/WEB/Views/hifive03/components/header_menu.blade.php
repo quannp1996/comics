@@ -22,10 +22,9 @@
             <div class="header-mid d-none d-md-block">
                 <div class="container">
                     <div class="row d-flex align-items-center">
-
                         <div class="col-xl-3 col-lg-3 col-md-3">
                             <div class="logo">
-                                <a href="index-2.html"><img src="{{ asset('template/assets/img/logo/logo.png') }}" alt></a>
+                                <a href="{{ route('frontend_default_page') }}"><img src="{{ asset('template/assets/img/logo/logo.png') }}" alt></a>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9">

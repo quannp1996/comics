@@ -6,21 +6,13 @@ use App\Ship\Parents\Models\Model;
 
 class Comment extends Model
 {
-    protected $fillable = [
+    protected $fillable = [];
 
-    ];
+    protected $attributes = [];
 
-    protected $attributes = [
+    protected $hidden = [];
 
-    ];
-
-    protected $hidden = [
-
-    ];
-
-    protected $casts = [
-
-    ];
+    protected $casts = [];
 
     protected $dates = [
         'created_at',
@@ -30,5 +22,10 @@ class Comment extends Model
     /**
      * A resource key to be used in the serialized responses.
      */
+
+    public function replies()
+    {
+        return $this->hasMany(self::class, 'reply_id', 'id');
+    }
     protected string $resourceKey = 'Comment';
 }

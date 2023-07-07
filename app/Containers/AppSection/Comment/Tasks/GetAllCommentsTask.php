@@ -3,19 +3,13 @@
 namespace App\Containers\AppSection\Comment\Tasks;
 
 use App\Containers\AppSection\Comment\Data\Repositories\CommentRepository;
-use App\Ship\Parents\Tasks\Task;
+use App\Ship\Core\AbstractClass\ListTask;
 
-class GetAllCommentsTask extends Task
+class GetAllCommentsTask extends ListTask
 {
-    protected CommentRepository $repository;
-
     public function __construct(CommentRepository $repository)
     {
         $this->repository = $repository;
-    }
-
-    public function run()
-    {
-        return $this->repository->paginate();
+        $this->equalFields = ['status', 'reply_id', 'object_id', 'type'];
     }
 }

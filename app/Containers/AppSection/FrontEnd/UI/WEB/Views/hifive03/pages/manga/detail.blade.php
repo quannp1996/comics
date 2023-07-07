@@ -16,19 +16,18 @@
         </div>
     </section>
 
-
     <section id="manga_single_page" class="pt-50 pb-20">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="manga_name text-start">
-                        <h2>{{ $manga->desc->title }}</h2>
+                        <h2 id="manga_title">{{ $manga->desc->title }}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    <img class="w-100 img-fluid" src="assets/img/manga_single/single1.jpg" alt>
+                    <img class="w-100 img-fluid" id="manga_avatar" src="{{ $manga->getImageURL() }}" alt>
                 </div>
                 <div class="col-lg-6">
                     <form class="form-1 mb-3 mt-3">
@@ -36,7 +35,7 @@
                             <select id="glsr-ltr" class="star-rating">
                                 <option value>Select a rating</option>
                                 <option value="5">5</option>
-                                <option value="4" selected>4</option>
+                                <option value="4">4</option>
                                 <option value="3">3</option>
                                 <option value="2">2</option>
                                 <option value="1">1</option>
@@ -141,7 +140,9 @@
                                 @foreach ($manga->chapters as $chapter)
                                     <li>
                                         <a href="chapter/chapter.html" class="d-flex flex-wrap justify-content-between">
-                                            <span>{{ $chapter->title }}</span><span> {{ $chapter->created_at ? $chapter->created_at->format('d/m/Y') : 'Đang cập nhật' }} </span>
+                                            <span>{{ $chapter->title }}</span><span>
+                                                {{ $chapter->created_at ? $chapter->created_at->format('d/m/Y') : 'Đang cập nhật' }}
+                                            </span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -156,7 +157,7 @@
                     <a href="#">
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img class="play" src="assets/img/manga/small8.jpg" alt>
+                                <img class="play" src="{{ asset('template/assets/img/manga/small8.jpg') }}" alt>
                                 <div class="overlay_play2">
                                     <i class="fa-solid fa-heart"> 61M</i>
                                 </div>
@@ -185,7 +186,7 @@
                     <a href="#">
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img class="play" src="assets/img/manga/small9.jpg" alt>
+                                <img class="play" src="{{ asset('template/assets/img/manga/small9.jpg') }}" alt>
                                 <div class="overlay_play2">
                                     <i class="fa-solid fa-heart"> 89M</i>
                                 </div>
@@ -214,7 +215,7 @@
                     <a href="#">
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img class="play" src="assets/img/manga/small10.jpg" alt>
+                                <img class="play" src="{{ asset('template/assets/img/manga/small10.jp') }}g" alt>
                                 <div class="overlay_play2">
                                     <i class="fa-solid fa-heart"> 99M</i>
                                 </div>
@@ -243,7 +244,7 @@
                     <a href="#">
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img class="play" src="assets/img/manga/small11.jpg" alt>
+                                <img class="play" src="{{ asset('template/assets/img/manga/small11.jp') }}g" alt>
                                 <div class="overlay_play2">
                                     <i class="fa-solid fa-heart"> 61M</i>
                                 </div>
@@ -273,150 +274,18 @@
             </div>
         </div>
     </section>
-
-
-    <section id="commentbox">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8">
-
-                    <div class="comment_area mb-50 clearfix">
-                        <h5 class="title">12 Comments</h5>
-                        <ol>
-
-                            <li class="single_comment_area">
-
-                                <div class="comment-content d-flex">
-
-                                    <div class="comment-author">
-                                        <img class="w-100 img-fluid" src="assets/img/comment/comment_1.png"
-                                            alt="author">
-                                    </div>
-
-                                    <div class="comment-meta">
-                                        <a href="#" class="post-date">27 Aug 2024</a>
-                                        <h5>Jerome Leonard</h5>
-                                        <p>I'm usually an anime-only type person but watching the first 3 episodes of
-                                            this show made me read the manga its actually amazing</p>
-                                        <a href="#" class="like">Like</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                </div>
-                                <ol class="children">
-                                    <li class="single_comment_area">
-
-                                        <div class="comment-content d-flex">
-
-                                            <div class="comment-author">
-                                                <img class="w-100 img-fluid" src="assets/img/comment/comment_2.png"
-                                                    alt="author">
-                                            </div>
-
-                                            <div class="comment-meta">
-                                                <a href="#" class="post-date">27 Aug 2024</a>
-                                                <h5>Theodore Adkins</h5>
-                                                <p>I started watching this by accident and it's so funny. Anya is
-                                                    possibly the cutest anime character I've seen in a while (and not in
-                                                    that cutesy anime ick way). I really want them to be a family in the
-                                                    end, even if the mission fails. </p>
-                                                <a href="#" class="like">Like</a>
-                                                <a href="#" class="reply">Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </li>
-
-                            <li class="single_comment_area">
-
-                                <div class="comment-content d-flex">
-
-                                    <div class="comment-author">
-                                        <img class="w-100 img-fluid" src="assets/img/comment/comment_4.png"
-                                            alt="author">
-                                    </div>
-
-                                    <div class="comment-meta">
-                                        <a href="#" class="post-date">27 Aug 2024</a>
-                                        <h5>Melode Mash</h5>
-                                        <p>Great show. Anya is lovely character. I hope the 3 of them become a real
-                                            family. </p>
-                                        <a href="#" class="like">Like</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="single_comment_area">
-
-                                <div class="comment-content d-flex">
-
-                                    <div class="comment-author">
-                                        <img class="w-100 img-fluid" src="assets/img/comment/comment_3.png"
-                                            alt="author">
-                                    </div>
-
-                                    <div class="comment-meta">
-                                        <a href="#" class="post-date">27 Aug 2024</a>
-                                        <h5>Roger Marshall</h5>
-                                        <p>Anya is so freaking funny ! Im so happy T _ T </p>
-                                        <a href="#" class="like">Like</a>
-                                        <a href="#" class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="app-poster d-none d-lg-block">
-                        <img src="assets/img/collection/news_card.jpg" alt>
-                        <div class="app_overlay">
-                            <ul class="d-flex flex-wrap justify-content-between">
-                                <li class="mr-1"><a href="#">
-                                        <img class="w-100" src="assets/img/app/app1.png" alt>
-                                    </a></li>
-                                <li class="ml-1"><a href="#">
-                                        <img class="w-100" src="assets/img/app/app2.png" alt>
-                                    </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                            placeholder="Write Comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text"
-                                            placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email-comment" type="email"
-                                            placeholder="Email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send
-                                    Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-comments-box :mangaID="$manga->id"></x-comments-box>
 @endsection
+@push('js_bot_all')
+    <script>
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('fa037a4bac2cb6548e51', {
+            cluster: 'ap1'
+        });
+        var channel = pusher.subscribe('notification_manga_{{ $manga->id }}');
+        channel.bind('App\\Ship\\Events\\PusherMangaNotication', function(data) {
+            $('#manga_title').text(data.message);
+        });
+    </script>
+@endpush

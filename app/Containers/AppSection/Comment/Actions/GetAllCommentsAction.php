@@ -3,13 +3,14 @@
 namespace App\Containers\AppSection\Comment\Actions;
 
 use App\Containers\AppSection\Comment\Tasks\GetAllCommentsTask;
+use App\Ship\Core\AbstractClass\ListAction;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
-class GetAllCommentsAction extends Action
+class GetAllCommentsAction extends ListAction
 {
-    public function run(Request $request)
+    public function __construct(GetAllCommentsTask $task)
     {
-        return app(GetAllCommentsTask::class)->addRequestCriteria()->run();
+        parent::__construct($task);
     }
 }

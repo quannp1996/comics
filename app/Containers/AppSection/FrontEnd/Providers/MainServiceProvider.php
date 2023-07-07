@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\FrontEnd\Providers;
 
+use App\Containers\AppSection\FrontEnd\Components\CommentBoxComponent;
 use App\Containers\AppSection\FrontEnd\Components\FooterMenuComponent;
 use App\Containers\AppSection\FrontEnd\Components\HeaderMenuComponent;
 use App\Containers\AppSection\FrontEnd\Components\NewPublishedManga;
@@ -43,5 +44,6 @@ class MainServiceProvider extends MainProvider
         Blade::component('top-menu', TopMenuComponent::class);
         Blade::component('footer-menu', FooterMenuComponent::class);
         Blade::component('published-manges', RecentPublishedManga::class);
+        Blade::component('comments-box', CommentBoxComponent::class);
     }
 }

@@ -16,7 +16,7 @@ class SyncMangaDescriptionTask
 
     public function run(int $mangaID, array $data)
     {
-        $this->repository->where('id', $mangaID)->delete();
+        $this->repository->where('manga_id', $mangaID)->delete();
         $this->repository->insert($data);
     }
 }

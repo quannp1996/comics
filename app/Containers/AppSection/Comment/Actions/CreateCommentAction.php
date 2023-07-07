@@ -6,13 +6,18 @@ use App\Containers\AppSection\Comment\Models\Comment;
 use App\Containers\AppSection\Comment\Tasks\CreateCommentTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
+use Arr;
 
 class CreateCommentAction extends Action
 {
-    public function run(Request $request): Comment
+    public function run(array $allData): Comment
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
+        $data = Arr::only($allData, [
+            'name',
+            'content',
+            'email',
+            'type',
+            'object_id'
         ]);
 
         return app(CreateCommentTask::class)->run($data);

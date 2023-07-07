@@ -2,16 +2,17 @@
   'app' => 
   array (
     'name' => 'comics',
-    'env' => 'production',
-    'debug' => false,
-    'url' => 'http://comics.test',
-    'admin_url' => 'http://admin.comics.test',
+    'env' => 'local',
+    'debug' => true,
+    'url' => 'https://comics.test',
+    'api' => 'https://api.comics.test',
+    'admin_url' => 'https://admin.comics.test',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:iAHdrrynCDc0kplg8HL9CEMS5T7OUgwrMefDOvTU27c=',
+    'key' => 'base64:/kuXo4chqZVe1B1y2vk8CSY60wwEa06pWPseYEoVv/0=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -358,7 +359,7 @@
       array (
         'driver' => 'local',
         'root' => 'C:\\laragon\\www\\comics\\storage\\app/public',
-        'url' => 'http://comics.test/storage',
+        'url' => 'https://comics.test/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -640,12 +641,12 @@
     'hash-id' => true,
     'api' => 
     array (
-      'url' => 'http://api.comics.test',
-      'prefix' => '/',
+      'url' => 'https://api.comics.test',
+      'prefix' => 'api/',
       'enable_version_prefix' => true,
       'expires-in' => '1440',
       'refresh-expires-in' => '43200',
-      'debug' => false,
+      'debug' => true,
       'enabled-implicit-grant' => true,
       'throttle' => 
       array (
@@ -1162,6 +1163,12 @@
   'vendor-debugger' => 
   array (
   ),
+  'vendor-frontEnd' => 
+  array (
+  ),
+  'vendor-setting' => 
+  array (
+  ),
   'dompdf' => 
   array (
     'show_warnings' => false,
@@ -1171,7 +1178,7 @@
     array (
       'font_dir' => 'C:\\laragon\\www\\comics\\storage\\fonts',
       'font_cache' => 'C:\\laragon\\www\\comics\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\ProTech\\AppData\\Local\\Temp',
+      'temp_dir' => 'C:\\Users\\Admin\\AppData\\Local\\Temp',
       'chroot' => 'C:\\laragon\\www\\comics',
       'allowed_protocols' => 
       array (
