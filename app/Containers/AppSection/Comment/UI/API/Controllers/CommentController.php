@@ -9,6 +9,7 @@ use App\Containers\AppSection\Comment\Actions\CreateCommentAction;
 use App\Containers\AppSection\Comment\Actions\GetAllCommentsAction;
 use App\Containers\AppSection\Comment\Models\Comment;
 use App\Containers\AppSection\Comment\UI\API\Requests\PostMangaCommentRequest;
+use App\Ship\Events\PusherCommentMangaNotication;
 use App\Ship\Parents\Controllers\ApiController;
 use DB;
 use Exception;
@@ -24,16 +25,20 @@ class CommentController extends ApiController
             $comment = app(CreateCommentAction::class)->run($request->merge([
                 'type' => Comment::class,
                 'status' => EnumBase::ENABLE_STATUS,
+                'user_id' => 0
             ])->all());
             DB::commit();
-            // event()
+            event(new PusherCommentMangaNotication(json_encode([
+                'name' => $comment->name,
+                'email' => $comment->email,
+                'content' => $comment->content
+            ]), $request->object_id));
             return response()->json([
                 'success' => true
             ]);
         }catch(Exception $e){
-
+            dd($e->getMessage());
         }
-        return $this->created($this->transform($comment, CommentTransformer::class));
     }
 
     public function getAllComments(GetAllCommentsRequest $request): array

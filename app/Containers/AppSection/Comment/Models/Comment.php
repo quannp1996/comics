@@ -6,7 +6,14 @@ use App\Ship\Parents\Models\Model;
 
 class Comment extends Model
 {
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'content',
+        'email',
+        'type',
+        'object_id',
+        'user_id'
+    ];
 
     protected $attributes = [];
 

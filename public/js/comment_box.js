@@ -6,25 +6,26 @@ var boxComments = new Vue({
         isSending: false,
         pagination: {},
         commentForm: {
-            content: '123',
+            content: 'Cảm ơn bạn',
             name: '',
             email: '',
         }
     },
     mounted: function(){
         $.get(this.url.listComments).then(response => {
-            console.log(response);
+            this.comments = response.data;
+            this.pagination = response.meta.pagination;
         });
     },
     methods: {
         addComment: function (comment) {
-
+            this.comments.push(comment);
         },
         postComment: function () {
             $.post(this.url.postComment, {
-                _token: 
+                ... this.commentForm
             }).then(response => {
-
+                console.log(response);
             });
         }
     },

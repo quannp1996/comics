@@ -24,12 +24,12 @@ class CommentTransformer extends Transformer
     public function transform(Comment $comment): array
     {
         $response = [
-            'object' => $comment->getResourceKey(),
             'id' => $comment->getHashedKey(),
+            'name' => $comment->name,
+            'content' => $comment->content,
+            'email' => $comment->email,
             'created_at' => $comment->created_at,
             'updated_at' => $comment->updated_at,
-            'readable_created_at' => $comment->created_at->diffForHumans(),
-            'readable_updated_at' => $comment->updated_at->diffForHumans(),
         ];
 
         return $response;

@@ -17,7 +17,8 @@ class CreateCommentAction extends Action
             'content',
             'email',
             'type',
-            'object_id'
+            'object_id',
+            'user_id'
         ]);
 
         return app(CreateCommentTask::class)->run($data);

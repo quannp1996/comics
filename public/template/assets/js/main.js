@@ -1,3 +1,8 @@
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 (function ($) {
   "use strict"
 
@@ -12,7 +17,7 @@
 
   //>>>>>>> acmeticker >>>>>>>
   jQuery(document).ready(function ($) {
-    
+
   })
 
 
@@ -26,7 +31,7 @@
       openedSymbol: '-'
     });
   };
-  
+
   //>>>>>>> Slick Slider >>>>>>>
 
   // trending-top
@@ -55,28 +60,28 @@
     initialSlide: 3,
     loop: true,
     responsive: [{
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false,
-        }
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: false,
       }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
       // You can unslick at a given breakpoint now by adding:
       // settings: "unslick"
       // instead of a settings object
@@ -84,7 +89,7 @@
 
   });
 
-//>>>>>>> Show Modal >>>>>>>
+  //>>>>>>> Show Modal >>>>>>>
   $('.js-show-modal1').on('click', function (e) {
     e.preventDefault();
     $('.js-modal1').addClass('show-modal1');
@@ -120,7 +125,7 @@
   });
 
 
-//>>>>>>> Custom Sticky Menu >>>>>>>
+  //>>>>>>> Custom Sticky Menu >>>>>>>
 
   $(window).on('scroll', function () {
     var scroll = $(window).scrollTop();
@@ -131,7 +136,7 @@
     }
   });
 
-// Show img flex
+  // Show img flex
   $(window).on('scroll', function () {
     var scroll = $(window).scrollTop();
     if (scroll < 245) {
@@ -177,7 +182,7 @@
     activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
   });
 
-  
+
   //>>>>>>> data-background >>>>>>>
   $("[data-background]").each(function () {
     $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
@@ -195,7 +200,7 @@
     });
   }
 
-//>>>>>>> Sakura Flower >>>>>>>
+  //>>>>>>> Sakura Flower >>>>>>>
   window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
@@ -254,14 +259,14 @@
           x_pos,
           y_pos,
           Math.random() + 0.5, {
-            x: random(360),
-            y: random(360),
-            z: random(360)
-          }, {
-            x: random(10),
-            y: random(10),
-            z: random(10)
-          },
+          x: random(360),
+          y: random(360),
+          z: random(360)
+        }, {
+          x: random(10),
+          y: random(10),
+          z: random(10)
+        },
           random(5)
         ));
       }
@@ -363,13 +368,5 @@
       el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect class="gl-star-full" width="19" height="19" x="2.5" y="2.5"/><polygon fill="#FFF" points="12 5.375 13.646 10.417 19 10.417 14.665 13.556 16.313 18.625 11.995 15.476 7.688 18.583 9.333 13.542 5 10.417 10.354 10.417"/></svg>';
     },
   });
-
-
-
-
-
-
-
-
 
 })(jQuery);

@@ -142,6 +142,7 @@ class MangesController extends BaseAdminController
             $manga = $action->run($request->id, $request->all());
             $manga->load('categories');
             DB::commit();
+            event(new PusherHomeNotication($manga->desc->title));
             event(new PusherMangaNotication($manga->desc->title, $manga->id));
             return redirect(route('admin_manges_list'))->with('success', 'Cập nhật thành công!');
         }catch(Exception $e){
